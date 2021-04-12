@@ -25,7 +25,6 @@
 \RequirePackage{ifthen}
 \RequirePackage{wrapfig}
 \RequirePackage{xstring}
-\RequirePackage[a4paper, left=35mm, right=35mm, top=35mm, bottom=35mm]{geometry}
 \RequirePackage[utf8]{inputenc}
 
 \input{uva-inf-common}

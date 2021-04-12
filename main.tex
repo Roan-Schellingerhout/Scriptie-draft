@@ -20,10 +20,15 @@
 \usepackage{booktabs}
 \usepackage{lineno}
 \usepackage{dblfloatfix}
-
 \usepackage{subfiles}
 
+\makeatletter
+\patchcmd{\@startsection}{\@ifstar}{\nolinenumbers\@ifstar}{}{}
+\patchcmd{\@xsect}{\ignorespaces}{\linenumbers\ignorespaces}{}{}
+\makeatother
+
 \bibliographystyle{apalike}
+\setlength{\parindent}{10ex}
 
 \assignment{Bachelor Thesis}
 \title{Conspiracy videos on YouTube}
@@ -32,8 +37,9 @@
 \date{\today}
 
 \begin{document}
+
 \maketitle
-\setlength{\parindent}{12ex}
+
 \linenumbers
 
 \subfile{sections/1. introduction}
@@ -42,12 +48,20 @@
 
 \subfile{sections/3. methodology}
 
+\subfile{sections/4. results}
+
+\subfile{sections/5. discussion}
+
+
 \newpage
 
 \subfile{sections/planning}
 
 \newpage
 
+\nolinenumbers
+
 \bibliography{sources} 
+\subfile{sections/6. appendix}
 
 \end{document}
