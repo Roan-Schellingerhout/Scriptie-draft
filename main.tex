@@ -21,6 +21,7 @@
 \usepackage{lineno}
 \usepackage{dblfloatfix}
 \usepackage{subfiles}
+\usepackage[toc,page]{appendix}
 
 \makeatletter
 \patchcmd{\@startsection}{\@ifstar}{\nolinenumbers\@ifstar}{}{}
@@ -61,6 +62,8 @@
 \nolinenumbers
 
 \bibliography{sources} 
+
+\newpage
 
 \subfile{sections/6. appendix}
 
