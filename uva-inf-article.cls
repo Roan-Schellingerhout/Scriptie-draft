@@ -112,37 +112,17 @@
                     \GetTranslation{student}%
                   \fi:}\\
 			\foreach \index in {1, ..., \value{authorcount}} {%
-                {\getprefix{author\index}\\ {\small \getprefix{uva\index}\\[0.2cm]}}
+                {\getprefix{author\index} {\small \getprefix{uva\index}\\[0.2cm]}}
             }
 		\end{flushleft}
 	\end{minipage}
 ~
 	\begin{minipage}{0.4\textwidth}
 		\begin{flushright}
-			\ifdefempty{\@tutor}{}{
-    			\emph{\GetTranslation{tutor}:} \\
-    			\@tutor \\[0.2cm]
-			}
-			\ifdefempty{\@mentor}{}{
-    			\emph{\GetTranslation{mentor}:} \\
-    			\@mentor \\[0.2cm]
-			}
-			\ifdefempty{\@group}{}{
-    			\emph{\GetTranslation{group}:} \\
-    			\@group \\[0.2cm]
-    		}
 			\ifdefempty{\@docent}{}{
     			\emph{\GetTranslation{lecturer}:} \\
     			\@docent \\[0.2cm]
     		}
-			\ifdefempty{\@course}{}{
-    			\emph{\GetTranslation{course}:} \\
-    			\@course \\[0.2cm]
-    		}
-			\ifdefempty{\@courseid}{}{
-    			\emph{\GetTranslation{course_id}:} \\
-    			\@courseid \\[0.2cm]
-			}
 		\end{flushright}
 	\end{minipage}\\[1 cm]
 \end{center}
