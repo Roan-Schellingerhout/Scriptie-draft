@@ -19,18 +19,18 @@
   \label{fig:ML_scores}
 \end{figure}
 
-The hyperparameter tuning lead to impressive scores for all classifiers. The best-performing classifier
-is the support-vector machine making use of the Radial Basis Function (RBF) kernel and a penalty
-parameter (C-value) of 10. The SVM is closely followed by the neural network using the identity
-activation function, with 10 hidden layers of 10 neurons. In third place, there is a two-way tie for
-accuracy between ridge regression with a sparse-cg solver and penalty (alpha) value of 0.1, and logistic
-regression with an L2 penalty, a penalty (C) value of 20 and a newton-cg solver. However, ridge
-regression has a slightly better F1-score, though this difference is neglectable (0.9202 as opposed to
-0.9197). The worst-performing classifier is also the simplest of the bunch: the k-nearest neighbors
-classifier (K=1). Although its performance is still formidable, it does substantially worse than the
-others. An overview of all metrics for each classifier can be seen in figure \ref{fig:ML_scores}. The
-ten best-performing configurations for each classifier can be found in appendix
-\ref{appendix:Hyperparameters}.
+The hyperparameter tuning lead to impressive scores for all classifiers. When making prediction for the
+test set, the best-performing classifier is the support-vector machine making use of the Radial Basis
+Function (RBF) kernel and a penalty parameter (C-value) of 10. In second place, there is a two-way tie
+for accuracy between ridge regression with a sparse-cg solver and penalty (alpha) value of 0.1, and the
+neural network using the identity activation function with 10 hidden layers of 10 neurons. However,
+ridge regression has a slightly better F1-score, though this difference is neglectable (0.9193 as
+opposed to 0.9184). The neural network and ridge regression are closely followed by logistic regression
+with an L2 penalty, a penalty (C) value of 20 and a newton-cg solver. The worst-performing classifier is
+also the simplest of the bunch: the k-nearest neighbors classifier (K=1). Although its performance is
+still formidable, it does substantially worse than the others. An overview of all metrics for each
+classifier can be seen in figure \ref{fig:ML_scores}. The ten best-performing configurations for each
+classifier can be found in appendix \ref{appendix:Hyperparameters}.
 
 Noteworthy is the fact that the optimal ensemble actually outperforms the support-vector machine by a
 slight margin. This ensemble, consisting of the SVM, the neural network, and surprisingly, the k-nearest

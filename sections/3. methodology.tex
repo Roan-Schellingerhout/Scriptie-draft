@@ -14,7 +14,7 @@ To answer the research question, it is necessary to determine which YouTube vide
 conspiracy videos. Considering the large amount of videos getting recommended, determining each video
 manually is simply not possible. There are two possible ways to solve this problem. Firstly, there is a
 dataset which contains nearly 7000 YouTube channels that have been manually labeled based on their
-politcal view - almost 2500 of which were labeled as conspiracy channels \citep{ledwich2019algorithmic};
+politcal view - almost 3000 of which were labeled as conspiracy channels \citep{ledwich2019algorithmic};
 whenever a video is made by one such channel, it can be considered a conspiracy video. However, due to
 the enormous amount of existing YouTube channels, the odds of a video being uploaded by a channel that
 is not present in this dataset are very large. For those videos, a supervised machine learning
@@ -34,30 +34,31 @@ dataset contains 65.683 unique YouTube videos, 22.156 of which are considered as
 However, this dataset was not yet suitable for machine learning, as the data was still messy. Therefore,
 multiple steps were taken in order to clean the data. Firstly, the two classes (conspiracy and
 non-conspiracy) were balanced, so that the classifier would not develop a bias for non-conspiracy
-videos. Rather than opting for balancing the two classes through the use of class-weights, the choice
+videos. Rather than opting for balancing the two classes through the use of class-weights (a technique
+where weights are attributed to classes, thereby telling the classifier that getting a prediction
+correct for a certain, underrepresented class is more important), the choice
 was made to under-sample the data in order to equalize both classes (both containing 22.156 videos, for
-a total of 44.312 videos) \citep{lemaitre2017imbalanced}. As there was plenty of data in the dataset,
-under-sampling was more convenient than implementing class-weights: a technique where weights are
-attributed to classes, thereby telling the classifier that getting a prediction correct for a certain,
-underrepresented class is more important \citep{sun2006boosting}. After both classes had been balanced,
-the text for each video had to be translated into English. As the original dataset by
-\citet{ledwich2019algorithmic} also contained channels by non-English speakers, these videos had to be
-automatically translated. Then, a few common cleaning methods were applied: all text was converted to
+a total of 44.312 videos) \citep{lemaitre2017imbalanced, sun2006boosting}. As there was plenty of data
+in the dataset, under-sampling was more convenient than implementing class-weights. After both classes
+had been balanced, the text for each video had to be translated into English. Since the original dataset
+by \citet{ledwich2019algorithmic} also contained channels by non-English speakers, these videos had to
+be automatically translated. Then, a few common cleaning methods were applied: all text was converted to
 lowercase, after which special characters, such as emojis were removed, whereafter stop words were
 removed and all words were stemmed using the porter stemmer \citep{karaa2013new}. Finally, each video
 was TF-IDF vectorized to allow the classifiers to function.
 
 \subsubsection{Performance optimization}
 After splitting the dataset into a train, test, and validation set, the hyperparameters of each
-algorithm were tuned to get the optimal performance. Performance was measures using four distinct
-metrics: the accuracy, which shows the share of correct predictions; the recall, which shows what
-fraction of truly positive samples were correctly labeled as such; the precision, which shows what part
-of the positive predictions were correct; and the F1-score, which is the harmonic mean of the recall and
-precision \citep{sokolova2009systematic}. For each classifier, different configurations of
-hyperparameters (such as the kernel and the penalty-parameter) were systemically tested - each possible
-combination was tried. By saving the performance measures for every such configuration, for every
-classifier, each individual classifiers could be optimized. By then comparing the performance of every
-optimally configured classifier, the best-performing classifier could be chosen. 
+algorithm were tuned to get the optimal performance \citep{feurer2019hyperparameter}. Performance was
+measured using four distinct metrics: the accuracy, which shows the share of correct predictions; the
+recall, which shows what fraction of truly positive samples were correctly labeled as such; the
+precision, which shows what part of the positive predictions were correct; and the F1-score, which is
+the harmonic mean of the recall and precision \citep{sokolova2009systematic}. For each classifier,
+different configurations of hyperparameters (such as the kernel and the penalty-parameter) were
+systemically tested - each possible combination was tried. By saving the performance measures for every
+such configuration, for every classifier, each individual classifiers could be optimized. By then
+comparing the performance of every optimally configured classifier, the best-performing classifier could
+be chosen. 
 
 Additionally, the added value of using a machine learning ensemble was measured. By having each
 classifier make a prediction for all videos in the dataset, a new dataset was created, wherein the

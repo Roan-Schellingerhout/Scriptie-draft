@@ -5,17 +5,70 @@
 
 \section{Theoretical Framework}
 \subsection{Filter bubbles on social media}
-Wanneer een gebruiker van een website zich bevindt in een eigen informatie-‘universum’, waarin de content en aanbevelingen inspelen op diens bestaande meningen en overtuigingen, zit deze in een filterbubbel \citep{pariser2011filter}. Gebruikers zijn alleen in zulke bubbels; iedereen heeft een eigen, unieke bubbel. Er kan overlap zijn tussen de bubbels van verschillende personen, maar elke bubbel is precies aangepast op het individu. In traditionele media kan een persoon ervoor \textit{kiezen} welk type meningen deze wil aanhoren, door bijvoorbeeld naar een specifieke nieuwszender te kijken. Online is deze keuze niet expliciet, op basis van het gedrag van de gebruiker wordt deze automatisch, zonder toestemming, een bepaald filter voorgelegd. 
+Whenever the user of a website finds themselves in their own information universe, in which the content
+and recommendations play into the user's preexisting opinions and believes, they are in a filter bubble
+\citep{pariser2011filter}. Users are by themselves in such bubbles and each bubble is unique. Different
+bubbles can have overlap, but each bubble is precisely tuned to an individual. In traditional media, a
+user makes a conscious \textit{choice} what types of opinions they want to hear, for example by choosing
+to watch a broadcaster with a specific political opinion. Online this decision is implicit: based on the
+user's behavior, their content is filtered automatically by an algorithm, without explicit consent. 
+
+% Bovenstaande tekst misschien naar de inleiding^
 
 \subsection{Filter bubbles on YouTube}
-Uit voorgaand onderzoek is gebleken dat het YouTube-algoritme dat verantwoordelijk is voor het geven van aanbevelingen gevoelig is voor het ontstaan van dergelijke filterbubbels. \citet{roth2020tubes} zijn tot deze conclusie gekomen nadat zij YouTube-aanbevelingen op basis van content hebben geanalyseerd. Op YouTube zijn er twee soorten aanbevelingen: aanbevelingen gebaseerd op het kijkgedrag van de gebruiker en aanbevelingen gebaseerd op de content van de huidige video. In hun onderzoek hebben Roth et al. de focus gelegd op aanbevelingen op basis van content. Hieruit bleek dat dergelijke aanbevelingen snel konden leiden tot lage diversiteit (oftewel: filterbubbels) en dat deze bubbels sneller optraden bij video’s met meer weergaven; des te meer weergaven een video had, des te minder divers de gerelateerde aanbevelingen. Zij speculeren dat dit verklaard kan worden door het feit dat YouTube meer informatie opslaat over video’s met veel weergaven, waardoor het algoritme betere aanbevelingen kan geven. Ook voorspellen zij dat, naarmate het algoritme meer informatie verkrijgt over de gebruiker, het deze informatie kan combineren met de informatie over video’s, wat zou leiden tot een nog sterkere beperking van de aanbevelingen. Volgens \citet{ledwich2019algorithmic} is het kijkgedrag van de gebruiker verantwoordelijk voor ongeveer 70\% van de aanbevelingen; kijkgedrag zou daarom veel invloed kunnen hebben op het ontstaan van filterbubbels op YouTube.  
+Previous research has found that YouTube's recommendation algorithm runs the risk of creating filter
+bubbles. \citet{roth2020tubes} came to this conclusion after they analysed YouTube recommendations based
+on content. YouTube has two distinct types of recommendations: recommendations based on the user's
+viewing behavior and recommendations based on the content of the current video a user is watching. In
+their research, Roth et al. focused predominantly on recommendations based on content. They found that
+such recommendations could quickly lead to a decrease in information diversity (read: filter bubbles)
+and that this decrease happened sooner for videos with a lot of views; the more views a video had, the
+less diverse its related recommendations. They speculate that this can be explained by the fact that
+YouTube tends to store more information about videos with a high view count, allowing the algorithm to
+give better recommendations for such videos. They also predict that, whenever the algorithm has more
+information about a user to its disposal, it can combine said information with the information it has
+about a certain video, which could lead to an even stronger limitation of recommendations. According to
+\citet{ledwich2019algorithmic}, a user's viewing behavior is responsible for approximately 70\% of their
+recommendations; this behavior could therefore play a big role in the creation of filter bubbles on
+YouTube. 
 
 \subsection{Conspiracy content on YouTube}
-YouTube heeft beperkte regels tegen het verspreiden van complottheorieën (YouTube, 2021). Zolang de content niet direct aanzet tot geweld of de volksgezondheid in gevaar brengt (denk hierbij aan misinformatie over het COVID-19-virus), mogen ook objectief onjuiste ideeën worden verspreid via YouTube. Dit zorgt ervoor dat er op YouTube meerdere complotgemeenschappen huisvesten. Complottheorieën als ‘de aarde is plat en de overheid probeert dat te verstoppen’, ‘de wereld zal binnenkort vergaan en alleen aanhangers van een bepaalde religie zullen overleven’, en ‘de wereld wordt geregeerd door kannibalistische, satanische pedofielen’ (beter bekend als QAnon), worden op de website door miljoenen mensen bekeken \citep{paolillo2018flat, miller2021characterizing}. Hoewel dergelijke video’s schadelijk kunnen zijn voor de maatschappij, worden deze door YouTube niet onderdrukt. Als een gebruiker interesse toont in zulke video’s, zal de gebruiker soortgelijke video’s aanbevolen krijgen, ook als YouTube ervan op de hoogte is dat het mogelijk schadelijke content is \citep{ledwich2019algorithmic}.
+YouTube has limited rules with regards to the spread of conspiracy videos \citep{youtube_2021}. As long
+as the content does not directly incite violence or endangers the public health (e.g. misinformation
+about the COVID-19 virus), objectively incorrect ideas are allowed to be shared on YouTube. As a result,
+YouTube is a home to multiple conspiracy communities. Conspiracy theories such as 'the earth is flat and
+the government is hiding it from us', 'the world will end soon and only followers of this specific
+religion will be spared', and 'the world is ruled by cannibalistic, satanic pedophiles' (better known as
+QAnon) gather millions of views on the platform \citep{paolillo2018flat, miller2021characterizing}.
+Though such videos could be considered harmful to society, they are not suppressed by YouTube. Whenever
+a user shows interest in this type of content, they will be recommended similar videos, even when
+YouTube is aware of their harmful nature \citep{ledwich2019algorithmic, maack_2019}.
 
 \subsection{The YouTube algorithm}
-Het YouTube-algoritme probeert aanbevelingen te doen op basis van de verwachtte kijktijd (watch time) en niet op basis van de kans dat een gebruiker op een video klikt \citep{covington2016deep}. Dit is gedaan om misleidende video’s (beter bekend als ‘clickbait’) een lagere kans te geven om aanbevolen te worden. Maar, het verkrijgen van feedback over een video op basis van kijktijd heeft te kampen met veel ruis, waardoor het lastig is om tevredenheid te meten. Zo blijkt dat, ook wanneer een persoon een video interessant vindt, deze de video vaak niet helemaal afkijkt. Gemiddeld kijken personen ongeveer 50-60\% van een video voordat zij hiervan wegklikken (Park et al., 2016). Echter, video’s die goed gestructureerd, of erg interessant zijn, kunnen dit percentage omhoog halen tot 70-80\%, waarin ongeveer de helft van de kijkers de video zelfs volledig afkijkt (Lang, 2018). Nadat een video is afgekeken, is er een 41.6\% kans dat de gebruiker een aanbevolen video zal bekijken. Welke video dit wordt, volgt een Zipf’s verdeling ($\alpha = 0.78$) op basis van de positie in de lijst van aanbevelingen \citep{zhou2010impact}. 
+The YouTube algorithm tries to recommend videos based on the expected watch time they will generate,
+rather than the probability of a user clicking on them \citep{covington2016deep}. This decision was made
+in order to decrease the likelihood of misleading videos (also known as \textit{clickbait}) being
+recommended. However, gathering feedback about videos through their watch time can cause a lot of noise,
+making it difficult to measure user satisfaction. As it turns out, even when a users enjoy a certain
+video, they are unlikely to watch it completely. On average, users watch around 50-60\% of a video
+before they switch it off \citep{park2016data}. Though, videos that are well-structured, or especially
+interesting, can improve this percentage up till 70-80\%, where nearly half of the viewers actually
+finish the video in its entirety \citep{lang_2018}. After a video has been watched, there is a 41.6\%
+chance that the user decides to watch a recommended video. Which recommendation the user will choose,
+follows a Zipf-distribution ($\alpha = 0.78$) with regards to the position of the video in the list of
+recommendations \citep{zhou2010impact}. 
 
-In voorgaand onderzoek is er dus vernomen dat filterbubbels zich voordoen op YouTube en dat het algoritme geneigd is om complot-content aan te bevelen. Ook wordt er gespeculeerd dat het algoritme beslissingen maakt op basis van het kijkgedrag van gebruikers en dit koppelt aan de content van video's. Om de gebruiker zo lang mogelijk op de website te houden, wat winstgevend is voor YouTube, probeert het algoritme video's aan te bevelen die de gebruiker waarschijnlijk lang zal kijken, welke soms schadelijke content bevatten. Op basis van deze informatie kan er dus verder onderzoek worden gedaan naar het ontstaan van filterbubbels en het verspreiden van complot-content op YouTube. Zo is er nog weinig bekend over hoe snel de aanbevelingen van een gebruiker zich aanpassen, terwijl dit erg belangrijk kan zijn in het ontstaan van zogeheten 'rabbit holes'. Ook is er nog geen onderzoek gedaan naar hoe het soort video invloed heeft op het algoritme. Wanneer een gebruiker veel aanbevelingen kijkt, zou dit mogelijk gezien kunnen worden als impliciete positieve feedback, waardoor er een sneeuwbaleffect kan ontstaan. 
-
+All in all, previous research has found that YouTube's algorithm is sensitive to filter bubbles and that
+it has a tendency to recommend conspiracy content. It is also speculated that the algorithm makes
+decisions based on the user's viewing behavior, which it combines with the content of videos. In order
+to keep the user on the website as long as possible, which is profitable for YouTube, the algorithm
+prefers recommending videos that it suspects the user will watch for a longer period of time, even when
+they may contain harmful content. Based on this information, further research can be done on the
+origination of filter bubbles and the spread of conspiracy content on YouTube. For example, little is
+known about how quickly a user's recommendations adapt to a user's behavior, even though this is a
+critical aspect when it comes to the creation of so-called \textit{rabbit holes}. Furthermore, no
+research has been done into the way different types of videos (recommendations in different locations,
+random videos, etc.) influence YouTube's algorithm. For example, whenever a user primarily watches
+recommended videos, the algorithm could see this as implicit positive feedback, which could cause a
+snowball-effect. 
 \end{document}
