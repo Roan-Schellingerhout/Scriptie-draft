@@ -5,6 +5,98 @@
 
 \section{Methodology}
 \subsection{Watching conspiracy videos}
+In order to determine how different watch strategies affect the YouTube algorithm, a python script was
+created to automatically log into a Google account and proceed to watch YouTube videos. The script was
+made using Selenium WebDriver: a suite of tools used for browser automation. 
+
+\subsubsection{Google login}
+Due to Google's strict policy regarding automation within their ecosystem, many obstacles are put into
+place to prevent users from logging into a Google account using automated software such as a selenium 
+script. To circumvent this restriction, two steps had to be taken. Firstly, the selenium WebDriver had to
+be accompanied by the selenium-stealth package, which removes metadata about the current browser, so that
+it is less obvious that a WebDriver is being used. Additionally, because this metadata was removed, the 
+Google login service was unable to check what browser the client was using. This results in a warning to 
+the user that their current browser may be insecure, which prohibits them from logging in. To avoid this 
+warning, the Google account needs to have been created within a WebDriver, such as Google's ChromeDriver 
+or Mozilla's GeckoDriver. Therefore, all twenty accounts were manually created in ChromeDriver. Since 
+Google accounts require a phone number verification upon creation, six free (prepaid) SIM cards were 
+ordered from various providers in order to create the accounts. Each SIM card could create two to three 
+accounts before it was blocked due to being used too many times. 
+
+\subsubsection{The watch strategies}
+After all accounts had been created, they were subdivided into four distinct watch strategies, making for
+a total of five accounts per strategy. The first watch strategy is the simplest one. The bots following 
+it will watch random, non-conspiracy videos from a dataset. This watch strategy is used as the 
+baseline to compare the other three strategies to. The second strategy is similar to the first: the 
+adhering bots watch random conspiracy videos from a dataset. This strategy was not added to 
+study the origination of filter bubbles, since it is unlikely that a filter bubble will come from this 
+strategy. Considering the video choices will be all over the place, it will be difficult for the 
+algorithm to determine the specific interest of the user. However, comparing how the algorithm 
+responds to conspiracy content in general as opposed to regular content might still yield interesting 
+results. The second-to-last strategy starts off in the same way: it chooses a random conspiracy video 
+from a dataset to watch. However, after having watched the initial video, it will start watching the 
+recommended videos displayed next to the current video. These recommendations consist of a combination of
+recommendations based on the content of the current video and the personalized recommendations of the 
+user. By using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually end up 
+in a filter bubble. Finally, the last strategy will be similar to the previous one, though with one 
+alteration: rather than choosing a recommended video from the list of recommendations next to the current
+video, it will choose a recommended video from the YouTube homepage of the account. Compared to the third
+strategy, this will lead to the user watching more personalized recommendations rather than content-based
+recommendations, possibly speeding up the creation and/or increasing the strength of the filter bubble. 
+
+Each strategy will be executed by five different accounts in order to decrease the probability of a 
+random streak of videos altering the result. The individual accounts will watch a total of twenty videos 
+as described by their watch strategy, for a total of four hundred videos watched by the script. 
+
+\subsubsection{Running the bots}
+% - 20 vids per bot
+% - videos under an hour long
+% - no livestreams
+
+% --> maybe smart: rather than having completely random starting vids for 3 and 4, filter them first. 
+
+
+\nolinenumbers
+
+\begin{algorithm}[H]
+ \KwData{User information and a video dataset}
+ \KwResult{The watched videos and homepage recommendations of the user}
+ 
+ \vspace{0.075in}
+ initialize WebDriver\;
+ log into Google account\;
+
+ \For{twenty videos}{
+  \eIf{there is a recommendation to be watched}{
+    go to the link\;
+   }{
+    pick a video to watch based on usertype\;
+    determine how long it will get watched\;
+    go to the link\;
+   }
+   \vspace{0.05in}
+   get video metadata and store for overview of watched videos\;
+   watch video for given amount of time\;
+   \vspace{0.05in}
+   \uIf{usertype == 3}{
+    pick recommendation next to current video to watch next\;
+    determine watch time for found recommendation\;
+   }
+   \vspace{0.05in}
+   go to YouTube homepage\;
+   store current recommendations for overview\;
+   \vspace{0.05in}
+   \uIf{usertype == 4}{
+    pick homepage recommendation to watch next\;
+    determine watch time for found recommendation\;
+   }
+ }
+ \vspace{0.05in}
+ \textbf{return} watched videos and homepage recommendations\;
+ \caption{Watch YouTube videos according to a watch strategy}
+\end{algorithm}
+
+\linenumbers
 
 \subsection{Leaving the filter bubble}
 
@@ -14,7 +106,7 @@ To answer the research question, it is necessary to determine which YouTube vide
 conspiracy videos. Considering the large amount of videos getting recommended, determining each video
 manually is simply not possible. There are two possible ways to solve this problem. Firstly, there is a
 dataset which contains nearly 7000 YouTube channels that have been manually labeled based on their
-politcal view - almost 3000 of which were labeled as conspiracy channels \citep{ledwich2019algorithmic};
+political view - almost 3000 of which were labeled as conspiracy channels \citep{ledwich2019algorithmic};
 whenever a video is made by one such channel, it can be considered a conspiracy video. However, due to
 the enormous amount of existing YouTube channels, the odds of a video being uploaded by a channel that
 is not present in this dataset are very large. For those videos, a supervised machine learning
