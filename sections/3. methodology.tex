@@ -1,6 +1,7 @@
 \documentclass[../main.tex]{subfiles}
 \graphicspath{{\subfix{images/}}}
 
+
 \begin{document}
 
 \section{Methodology}
@@ -43,18 +44,26 @@ alteration: rather than choosing a recommended video from the list of recommenda
 video, it will choose a recommended video from the YouTube homepage of the account. Compared to the third
 strategy, this will lead to the user watching more personalized recommendations rather than content-based
 recommendations, possibly speeding up the creation and/or increasing the strength of the filter bubble. 
-
 Each strategy will be executed by five different accounts in order to decrease the probability of a 
-random streak of videos altering the result. The individual accounts will watch a total of twenty videos 
-as described by their watch strategy, for a total of four hundred videos watched by the script. 
+random streak of videos altering the result. The individual accounts will watch a total of fifteen
+videos as described by their watch strategy, for a total of three hundred videos watched by the script. 
 
 \subsubsection{Running the bots}
-% - 20 vids per bot
-% - videos under an hour long
-% - no livestreams
+After the accounts were logged in, they started watching YouTube videos according to their watch
+strategy. However, some restrictions were put into place to make sure the bots did not take too long
+(considering three hundred videos had to be watched in total, some limitations had to apply). For
+example, the bots were not allowed to watch videos over an hour long, nor were they allowed to watch live
+streams, as those could theoretically go on infinitely. Additionally, the random videos at the start of
+the third and fourth strategy were first manually inspected to make sure the bots would not start the
+experiment by watching a falsely flagged conspiracy video. Considering the way in which the dataset was
+created, it is possible that some videos that are flagged as conspiracy videos are, in reality, normal 
+videos. This could happen whenever a conspiracy channel uploads a regular video for once (e.g. a holiday 
+video, promotion of some product, etc.). These \textit{false positives} are far and few between, however,
+having one of them be selected as the first video for strategy three or four had to be prevented, as that
+could greatly alter the final results. With these restrictions in mind, the following script was created
+and run for all twenty bots, keeping track of the videos they watched and the homepage recommendations they had after each video:
 
-% --> maybe smart: rather than having completely random starting vids for 3 and 4, filter them first. 
-
+\vspace{0.25in}
 
 \nolinenumbers
 
@@ -70,7 +79,7 @@ as described by their watch strategy, for a total of four hundred videos watched
   \eIf{there is a recommendation to be watched}{
     go to the link\;
    }{
-    pick a video to watch based on usertype\;
+    pick a random video to watch based on usertype\;
     determine how long it will get watched\;
     go to the link\;
    }
@@ -95,6 +104,20 @@ as described by their watch strategy, for a total of four hundred videos watched
  \textbf{return} watched videos and homepage recommendations\;
  \caption{Watch YouTube videos according to a watch strategy}
 \end{algorithm}
+
+\vspace{0.25in}
+
+\noindent Running the script for all twenty bots resulted in two different datasets: the first containing
+the videos watched by the bots, including their view count, likes/dislikes, and upload date; and one 
+containing the homepage recommendations for all bots, after each number of videos watched.
+To determine the influence of the watch strategies on the algorithm, the recommendations were labeled as 
+being either conspiracy or non-conspiracy videos by the classifier. By then grouping all recommendations 
+by their watch strategy and the number of videos watched before them (i.e. the recommendations after the 
+third video watched by all bots with strategy one), it was possible to calculate aggregates about general
+statistics of the recommendations, such as view count and video duration, and the percentage of 
+conspiracy videos present amongst them. This lead to four groups with fifteen entries of different 
+statistics (one for each video watched). In order to find out whether any of the differences between the 
+four groups were significant at any point, a number of ANOVAs were performed. 
 
 \linenumbers
 
@@ -140,17 +163,19 @@ removed and all words were stemmed using the porter stemmer \citep{karaa2013new}
 was TF-IDF vectorized to allow the classifiers to function.
 
 \subsubsection{Performance optimization}
-After splitting the dataset into a train, test, and validation set, the hyperparameters of each
+After splitting the dataset into a training, test, and validation set, the hyperparameters of each
 algorithm were tuned to get the optimal performance \citep{feurer2019hyperparameter}. Performance was
 measured using four distinct metrics: the accuracy, which shows the share of correct predictions; the
 recall, which shows what fraction of truly positive samples were correctly labeled as such; the
 precision, which shows what part of the positive predictions were correct; and the F1-score, which is
 the harmonic mean of the recall and precision \citep{sokolova2009systematic}. For each classifier,
 different configurations of hyperparameters (such as the kernel and the penalty-parameter) were
-systemically tested - each possible combination was tried. By saving the performance measures for every
-such configuration, for every classifier, each individual classifiers could be optimized. By then
-comparing the performance of every optimally configured classifier, the best-performing classifier could
-be chosen. 
+systemically tested - each possible combination was tried. The classifiers were trained on the training set
+and the optimal hyperparameters were determined based on the performance of the classifiers on the validation
+set. By saving these performance measures for every configuration, for every classifier, the optimal
+configuration for every classifier could be determined. Lastly, the classifiers were equipped with their
+optimal hyperparameters and then tested for the final time on the test set. By comparing the performance
+of every optimally configured classifier on the test set, the best-performing classifier could be chosen \citep{reitermanova2010data}. 
 
 Additionally, the added value of using a machine learning ensemble was measured. By having each
 classifier make a prediction for all videos in the dataset, a new dataset was created, wherein the
