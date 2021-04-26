@@ -48,6 +48,22 @@ Each strategy will be executed by five different accounts in order to decrease t
 random streak of videos altering the result. The individual accounts will watch a total of fifteen
 videos as described by their watch strategy, for a total of three hundred videos watched by the script. 
 
+Additionally, to simulate real-world user behavior, the average watch time for the videos will be normally
+distributed with a mean of 55\% and a standard deviation of 25\% \citep{park2016data}. The watch time will 
+not be able to exceed a value of 100, as a video cannot be watched for more than 100\%. In the same vein, the
+clicking behavior of users will be simulated as accurately as possible. The probability of a user clicking on
+a video at position $k$ within a given list of recommendations (its click-through rate: $CTR$), will be 
+determined using the following formula:
+
+\begin{equation}
+CTR(k; N, \alpha) = \frac{1/k^\alpha}{\sum_{n=1}^{N} (1/n^\alpha)}
+\end{equation}
+
+Wherein $N$ is the total number of recommendations and $\alpha$ is the distribution's exponent value ($\alpha
+= 0.78$) \citep{zhou2010impact}. Using this formula, when considering the first twenty recommendations, the
+first recommendation will have a click-through rate of approximately 20.6\%, after which the CTR quickly
+decreases, until a probability of 1.9\% at the twentieth recommendation. 
+
 \subsubsection{Running the bots}
 After the accounts were logged in, they started watching YouTube videos according to their watch
 strategy. However, some restrictions were put into place to make sure the bots did not take too long
