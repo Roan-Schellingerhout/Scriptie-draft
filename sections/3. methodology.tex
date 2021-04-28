@@ -10,6 +10,12 @@ In order to determine how different watch strategies affect the YouTube algorith
 created to automatically log into a Google account and proceed to watch YouTube videos. The script was
 made using Selenium WebDriver: a suite of tools used for browser automation. 
 
+In the following sections, each aspect of the initial experiment will be explained. Firstly, an explanation
+will be given about how to log into Google accounts using a python bot. Then, the watch strategies as
+mentioned in the research question will be defined, followed by a description of their video watching 
+behavior. Afterwards, some restrictions about the videos being watched will be mentioned. Additionally the
+actual script allowing the bots to be run will be described. Lastly, the precise form of the output of the script will be explained. 
+
 \subsubsection{Google login}
 Due to Google's strict policy regarding automation within their ecosystem, many obstacles are put into
 place to prevent users from logging into a Google account using automated software such as a selenium 
@@ -26,34 +32,48 @@ accounts before it was blocked due to being used too many times.
 
 \subsubsection{The watch strategies}
 After all accounts had been created, they were subdivided into four distinct watch strategies, making for
-a total of five accounts per strategy. The first watch strategy is the simplest one. The bots following 
+a total of five accounts per strategy. 
+
+\begin{description}
+\item[Random videos (baseline)] The first watch strategy is the simplest one. The bots following 
 it will watch random, non-conspiracy videos from a dataset. This watch strategy is used as the 
-baseline to compare the other three strategies to. The second strategy is similar to the first: the 
+baseline to compare the other three strategies to.
+
+\item[Random conspiracies] The second strategy is similar to the first: the 
 adhering bots watch random conspiracy videos from a dataset. This strategy was not added to 
 study the origination of filter bubbles, since it is unlikely that a filter bubble will come from this 
 strategy. Considering the video choices will be all over the place, it will be difficult for the 
 algorithm to determine the specific interest of the user. However, comparing how the algorithm 
 responds to conspiracy content in general as opposed to regular content might still yield interesting 
-results. The second-to-last strategy starts off in the same way: it chooses a random conspiracy video 
-from a dataset to watch. However, after having watched the initial video, it will start watching the 
-recommended videos displayed next to the current video. These recommendations consist of a combination of
-recommendations based on the content of the current video and the personalized recommendations of the 
-user. By using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually end up 
-in a filter bubble. Finally, the last strategy will be similar to the previous one, though with one 
-alteration: rather than choosing a recommended video from the list of recommendations next to the current
+results.
+
+% Uitleg misschien ergens anders ^
+
+\item[Video recommendations] The second-to-last strategy starts off in the same way: it chooses a random 
+conspiracy video from a dataset to watch. However, after having watched the initial video, it will start 
+watching the recommended videos displayed next to the current video. These recommendations consist of a 
+combination of recommendations based on the content of the current video and the personalized recommendations
+of the user. By using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually end 
+up in a filter bubble.
+
+\item[Homepage recommendations] Finally, the last strategy will be similar to the previous one, though with 
+one alteration: rather than choosing a recommended video from the list of recommendations next to the current
 video, it will choose a recommended video from the YouTube homepage of the account. Compared to the third
 strategy, this will lead to the user watching more personalized recommendations rather than content-based
-recommendations, possibly speeding up the creation and/or increasing the strength of the filter bubble. 
+recommendations, possibly speeding up the creation and/or increasing the strength of the filter bubble.
+
+\end{description}
+
 Each strategy will be executed by five different accounts in order to decrease the probability of a 
 random streak of videos altering the result. The individual accounts will watch a total of fifteen
 videos as described by their watch strategy, for a total of three hundred videos watched by the script. 
 
 Additionally, to simulate real-world user behavior, the average watch time for the videos will be normally
-distributed with a mean of 55\% and a standard deviation of 25\% \citep{park2016data}. The watch time will 
-not be able to exceed a value of 100, as a video cannot be watched for more than 100\%. In the same vein, the
-clicking behavior of users will be simulated as accurately as possible. The probability of a user clicking on
-a video at position $k$ within a given list of recommendations (its click-through rate: $CTR$), will be 
-determined using the following formula:
+distributed with a mean of 55\% and a standard deviation of 25\% \citep{park2016data, lang_2018}. The 
+watch time will not be able to exceed a value of 100, as a video cannot be watched for more than 100\%. In 
+the same vein, the clicking behavior of users will be simulated as accurately as possible. The probability 
+of a user clicking on a video at position $k$ within a given list of recommendations (its click-through 
+rate: $CTR$), will be determined using the following formula:
 
 \begin{equation}
 CTR(k; N, \alpha) = \frac{1/k^\alpha}{\sum_{n=1}^{N} (1/n^\alpha)}
@@ -76,9 +96,9 @@ created, it is possible that some videos that are flagged as conspiracy videos a
 videos. This could happen whenever a conspiracy channel uploads a regular video for once (e.g. a holiday 
 video, promotion of some product, etc.). These \textit{false positives} are far and few between, however,
 having one of them be selected as the first video for strategy three or four had to be prevented, as that
-could greatly alter the final results. With these restrictions in mind, the following script was created
-and run for all twenty bots, keeping track of the videos they watched and the homepage recommendations they
-had after each video:
+could have greatly altered the final results. With these restrictions in mind, the following script was 
+created and run for all twenty bots, keeping track of the videos they watched and the homepage 
+recommendations they had after each video:
 
 \vspace{0.25in}
 
@@ -89,33 +109,37 @@ had after each video:
  \KwResult{The watched videos and homepage recommendations of the user}
  
  \vspace{0.075in}
- initialize WebDriver\;
- log into Google account\;
 
- \For{twenty videos}{
-  \eIf{there is a recommendation to be watched}{
-    go to the link\;
-   }{
-    pick a random video to watch based on usertype\;
-    determine how long it will get watched\;
-    go to the link\;
-   }
-   \vspace{0.05in}
-   get video metadata and store for overview of watched videos\;
-   watch video for given amount of time\;
-   \vspace{0.05in}
-   \uIf{usertype == 3}{
-    pick recommendation next to current video to watch next\;
-    determine watch time for found recommendation\;
-   }
-   \vspace{0.05in}
-   go to YouTube homepage\;
-   store current recommendations for overview\;
-   \vspace{0.05in}
-   \uIf{usertype == 4}{
-    pick homepage recommendation to watch next\;
-    determine watch time for found recommendation\;
-   }
+ \For{twenty bots}{
+    initialize WebDriver\;
+    log into Google account\;
+    \vspace{0.05in}
+    
+     \For{fifteen videos}{
+      \eIf{there is a recommendation to be watched}{
+        go to the link\;
+       }{
+        pick a random video to watch based on usertype\;
+        determine how long it will get watched\;
+        go to the link\;
+       }
+       \vspace{0.05in}
+       get video metadata and store for overview of watched videos\;
+       watch video for given amount of time\;
+       \vspace{0.05in}
+       \uIf{usertype == 3}{
+        pick recommendation next to current video to watch next\;
+        determine watch time for found recommendation\;
+       }
+       \vspace{0.05in}
+       go to YouTube homepage\;
+       store current recommendations for overview\;
+       \vspace{0.05in}
+       \uIf{usertype == 4}{
+        pick homepage recommendation to watch next\;
+        determine watch time for found recommendation\;
+       }
+     }
  }
  \vspace{0.05in}
  \textbf{return} watched videos and homepage recommendations\;
@@ -124,23 +148,47 @@ had after each video:
 
 \vspace{0.25in}
 
+\linenumbers
+
 \noindent Running the script for all twenty bots resulted in two different datasets: the first containing
 the videos watched by the bots, including their view count, likes/dislikes, and upload date; and one 
 containing the homepage recommendations for all bots, after each number of videos watched.
 To determine the influence of the watch strategies on the algorithm, the recommendations were labeled as 
 being either conspiracy or non-conspiracy videos by the classifier. By then grouping all recommendations 
-by their watch strategy and the number of videos watched before them (i.e. the recommendations after the 
+by their watch strategy and the number of videos watched before them (e.g. the recommendations after the 
 third video watched by all bots with strategy one), it was possible to calculate aggregates about general
 statistics of the recommendations, such as view count and video duration, and the percentage of 
 conspiracy videos present amongst them. This lead to four groups with fifteen entries of different 
 statistics (one for each video watched). In order to find out whether any of the differences between the 
 four groups were significant at any point, a number of ANOVAs were performed. 
 
-\linenumbers
+\subsubsection{Outputs of the experiment}
+To create the initial recommendation dataset, the bots stored the following information about their top 
+twenty recommendations after each video watched: 
+\begin{itemize}
+    \item the id of the bot that had gotten the recommendations;
+    \item the amount of videos watched before the recommendation was given;
+    \item the URL of the video being recommended;
+    \item the URL of the channel that uploaded the recommendation.
+\end{itemize}
+To then allow the classifier to label the videos, and to calculate the aggregates per strategy, additional 
+data was gathered using YouTube's API. For each recommendation, the title, description, transcript, 
+(dis)likes, views, video duration, channel description, and channel keywords were collected. The title, 
+description, transcript, channel description, and channel keywords were collected in order for the 
+classifier to label the videos, as will be further explained in section \ref{Machine Learning}. The other 
+features were collected in order to calculate the aggregates used for the aforementioned ANOVAs. An example of the output can be seen in \ref{fig:DF_example}.
+
+\begin{figure}[t]
+  \textbf{Example DataFrame}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/df_example.png}
+  \caption{An example of the experiment's output}
+  \label{fig:DF_example}
+\end{figure}
 
 \subsection{Leaving the filter bubble}
 
-\subsection{Machine learning}
+\subsection{Machine learning} \label{Machine Learning}
 \subsubsection{Data gathering}
 To answer the research question, it is necessary to determine which YouTube videos can be considered
 conspiracy videos. Considering the large amount of videos getting recommended, determining each video
