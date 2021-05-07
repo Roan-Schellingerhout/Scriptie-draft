@@ -5,15 +5,19 @@
 \section{Hyperparameter tuning}
 \label{appendix:Hyperparameters}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ensemble
-\begin{table}[h!]
-\hskip-3.0cm\begin{tabular*}{1.5\textwidth}{c @{\extracolsep{\fill}} cccccccc}
+\begin{table}[ht]
+\begin{subtable}{\textwidth}
+\begin{adjustbox}{minipage=18cm, center}
+\sisetup{table-format=-1.5}   
+\centering
+\begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} cccccccc}
 
 \toprule
 Ensemble     & Activation & Layers        &  Neurons &  Accuracy &  Precision &    Recall &  F1 \\
 \midrule
-svm, nn, knn &   logistic & 1             &       20 &  0.939318 &   0.948923 &  0.931204 &  0.93998 \\
+svm, nn, knn &   logistic & 1             &       20 &  \textbf{0.939318} &   \textbf{0.948923} &  \textbf{0.931204} &  \textbf{0.93998} \\
 svm, nn, knn &       relu & 1             &       20 &  0.939318 &   0.948923 &  0.931204 &  0.93998 \\
 svm, nn, knn &   identity & 1             &        1 &  0.939318 &   0.948923 &  0.931204 &  0.93998 \\
 svm, nn, knn &   identity & 10            &        1 &  0.939318 &   0.948923 &  0.931204 &  0.93998 \\
@@ -27,20 +31,24 @@ svm, nn, logr, knn & identity & 1         &       10 &  0.939318 &   0.948923 & 
 
 \end{tabular*}
 \caption{\label{tab:Ensemble}Ensemble.}
-\end{table}
+\end{adjustbox}
+\end{subtable}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% SVM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{table}[h!]
+\bigskip
+\begin{subtable}{\textwidth}
+\begin{adjustbox}{minipage=18cm, center}
+\sisetup{table-format=-2}   
+\centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
-
 \toprule
  Kernel &      C &  Accuracy &  Precision &    Recall &        F1 \\
 \midrule
-    rbf &   10.0 &  0.936309 &   0.945473 &  0.928747 &  0.937035 \\
-    rbf &  100.0 &  0.935557 &   0.942289 &  0.930713 &  0.936465 \\
+    rbf &   10.0 & \textbf{0.936309} &   0.945473 &  0.928747 &  \textbf{0.937035} \\
+    rbf &  100.0 &  0.935557 &   0.942289 &  \textbf{0.930713} &  0.936465 \\
     rbf &    1.0 &  0.925276 &   0.930163 &  0.922850 &  0.926492 \\
-   poly &   10.0 &  0.916499 &   0.946017 &  0.886978 &  0.915547 \\
+   poly &   10.0 &  0.916499 &   \textbf{0.946017} &  0.886978 &  0.915547 \\
    poly &  100.0 &  0.915246 &   0.944940 &  0.885504 &  0.914257 \\
  linear &    1.0 &  0.913741 &   0.917944 &  0.912531 &  0.915229 \\
    poly &    1.0 &  0.909729 &   0.935065 &  0.884521 &  0.909091 \\
@@ -48,22 +56,26 @@ svm, nn, logr, knn & identity & 1         &       10 &  0.939318 &   0.948923 & 
  linear &  100.0 &  0.898195 &   0.905830 &  0.893366 &  0.899555 \\
     rbf &    0.1 &  0.878887 &   0.878906 &  0.884521 &  0.881705 \\
 \bottomrule
-
 \end{tabular*}
 \caption{\label{tab:Support-vector machine}Support-vector machine.}
-\end{table}
+\end{adjustbox}
+\end{subtable}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Neural network
-\begin{table}
-\hskip-1.2cm\begin{tabular*}{1.2\textwidth }{c @{\extracolsep{\fill}} cccccc}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\bigskip
+\begin{subtable}{\textwidth}
+\begin{adjustbox}{minipage=18cm, center}
+\sisetup{table-format=-1.2}   
+\centering
+\begin{tabular*}{\textwidth }{c @{\extracolsep{\fill}} cccccc}
 \toprule
 Activation & Layers & Neurons &  Accuracy &  Precision &    Recall &        F1 \\
 \midrule
-identity   & 10     &      10 &  0.923019 &   0.935484 &  0.912039 &  0.923613 \\
+identity   & 10     &      10 &  \textbf{0.923019} &   \textbf{0.935484} &  0.912039 &  \textbf{0.923613} \\
 identity   & 25     &      10 &  0.921013 &   0.933031 &  0.910565 &  0.921661 \\
 relu       & 10     &      10 &  0.919007 &   0.917561 &  0.924324 &  0.920930 \\
-identity   & 10     &      20 &  0.916750 &   0.906056 &  0.933661 &  0.919652 \\
+identity   & 10     &      20 &  0.916750 &   0.906056 &  \textbf{0.933661} &  0.919652 \\
 relu       & 10     &      20 &  0.915998 &   0.912221 &  0.924324 &  0.918233 \\
 tanh       & 10     &      10 &  0.915747 &   0.914592 &  0.920885 &  0.917728 \\
 relu       & 1      &       1 &  0.915747 &   0.931876 &  0.900737 &  0.916042 \\
@@ -71,21 +83,27 @@ tanh       & 25     &      20 &  0.915496 &   0.919052 &  0.914988 &  0.917016 \
 tanh       & 10     &      20 &  0.914744 &   0.920178 &  0.912039 &  0.916091 \\
 logistic   & 1      &       1 &  0.913741 &   0.925516 &  0.903686 &  0.914470 \\
 \bottomrule
-
 \end{tabular*}
 \caption{\label{tab:Neural network}Neural network.}
+\end{adjustbox}
+\end{subtable}
 \end{table}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Ridge regression
-\begin{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\clearpage
+\begin{table}[ht]
+\begin{subtable}{\textwidth}
+\ContinuedFloat
+\begin{adjustbox}{minipage=18cm, center}
+\sisetup{table-format=-1.2}   
+\centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
 
 \toprule
 Solver      &  Alpha &  Accuracy &  Precision &    Recall &        F1 \\
 \midrule
-auto        &    0.1 &  0.918506 &   0.919118 &  0.921376 &  0.920245 \\
+auto        &    0.1 &  \textbf{0.918506 }&   0.919118 &  \textbf{0.921376} &  \textbf{0.920245} \\
 sparse\_cg  &    0.1 &  0.918506 &   0.919118 &  0.921376 &  0.920245 \\
-sag         &    0.1 &  0.918255 &   0.919902 &  0.919902 &  0.919902 \\
+sag         &    0.1 &  0.918255 &   \textbf{0.919902} &  0.919902 &  0.919902 \\
 auto        &    1.0 &  0.917252 &   0.923497 &  0.913514 &  0.918478 \\
 sparse\_cg  &    1.0 &  0.917252 &   0.923497 &  0.913514 &  0.918478 \\
 sag         &    1.0 &  0.917252 &   0.923497 &  0.913514 &  0.918478 \\
@@ -97,16 +115,22 @@ auto        &  100.0 &  0.812437 &   0.854545 &  0.762162 &  0.805714 \\
 
 \end{tabular*}
 \caption{\label{tab:Ridge regression}Ridge regression.}
-\end{table}
+\end{adjustbox}
+\end{subtable}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Logistic regression
-\begin{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+\begin{subtable}{\textwidth}
+\begin{adjustbox}{minipage=18cm, center}
+\sisetup{table-format=-1.2}   
+\centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} cccccc}
 
 \toprule
 Penalty &   C &     Solver &  Accuracy &  Precision &    Recall &        F1 \\
 \midrule
-     l2 &  20 &  newton-cg &  0.918506 &   0.924107 &  0.915479 &  0.919773 \\
+     l2 &  20 &  newton-cg &  \textbf{0.918506} &   \textbf{0.924107} &  \textbf{0.915479} &  \textbf{0.919773} \\
      l2 &  20 &       saga &  0.918506 &   0.924107 &  0.915479 &  0.919773 \\
      l2 &  20 &        sag &  0.918506 &   0.924107 &  0.915479 &  0.919773 \\
      l2 &  10 &        sag &  0.916249 &   0.920831 &  0.914496 &  0.917653 \\
@@ -120,29 +144,45 @@ Penalty &   C &     Solver &  Accuracy &  Precision &    Recall &        F1 \\
 
 \end{tabular*}
 \caption{\label{tab:Logistic regression}Logistic regression.}
-\end{table}
+\end{adjustbox}
+\end{subtable}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% K-nearest neighbors
-\begin{table}[ht!]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bigskip
+\begin{subtable}{\textwidth}
+\begin{adjustbox}{minipage=18cm, center}
+\sisetup{table-format=-1.2}   
+\centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
 \toprule
 K &  Accuracy &  Precision &    Recall &        F1 \\
 \midrule
-1  &  0.889669 &   0.888456 &  0.896314 &  0.892368 \\
+1  &  \textbf{0.889669} &   0.888456 &  0.896314 &  \textbf{0.892368} \\
 3  &  0.888415 &   0.882212 &  0.901720 &  0.891859 \\
 4  &  0.879137 &   0.908899 &  0.848157 &  0.877478 \\
 5  &  0.873370 &   0.858482 &  0.900246 &  0.878868 \\
 6  &  0.873119 &   0.882441 &  0.866830 &  0.874566 \\
-2  &  0.872618 &   0.935043 &  0.806388 &  0.865963 \\
+2  &  0.872618 &   \textbf{0.935043} &  0.806388 &  0.865963 \\
 7  &  0.868355 &   0.848891 &  0.902703 &  0.874970 \\
 8  &  0.867603 &   0.867382 &  0.874201 &  0.870778 \\
-9  &  0.861585 &   0.835672 &  0.907125 &  0.869934 \\
+9  &  0.861585 &   0.835672 &  \textbf{0.907125} &  0.869934 \\
 10 &  0.859579 &   0.854397 &  0.873710 &  0.863946 \\
 \bottomrule
 \end{tabular*}
-\caption{\label{tab:K-nearest neighbors}K-nearest neighbors.}
+\caption{K-nearest neighbors.}\label{tab:sub_first}
+
+\end{adjustbox}
+\end{subtable}
+
+\caption{Results of the classifiers on the validation set with different hyperparameters. The best score per metric is written in bold.} \label{tab:Hyperparameters}
 \end{table}
 
 \end{appendices}
+
+
+
+
+
 
 \end{document}

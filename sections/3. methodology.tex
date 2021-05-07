@@ -35,54 +35,64 @@ After all accounts had been created, they were subdivided into four distinct wat
 a total of five accounts per strategy. 
 
 \begin{description}
-\item[Random videos (baseline)] The first watch strategy is the simplest one. The bots following 
+\item[1. Random videos (baseline)] The first watch strategy is the simplest one. The bots following 
 it will watch random, non-conspiracy videos from a dataset. This watch strategy is used as the 
 baseline to compare the other three strategies to.
 
-\item[Random conspiracies] The second strategy is similar to the first: the 
-adhering bots watch random conspiracy videos from a dataset. This strategy was not added to 
-study the origination of filter bubbles, since it is unlikely that a filter bubble will come from this 
-strategy. Considering the video choices will be all over the place, it will be difficult for the 
-algorithm to determine the specific interest of the user. However, comparing how the algorithm 
-responds to conspiracy content in general as opposed to regular content might still yield interesting 
-results.
+\item[2. Random conspiracies] The second strategy is similar to the first: the 
+adhering bots watch random conspiracy videos from a dataset. 
 
-% Uitleg misschien ergens anders ^
+\item[3. Video recommendations] The second-to-last strategy starts off in the same way as strategy 2: it 
+chooses a random conspiracy video from a dataset to watch. However, it then watches the four most similar 
+videos in the dataset (based on cosine similarity) in order to allow the algorithm to get a feel for the 
+user's interests. After watching those five initial videos, it starts looking at the recommended videos 
+displayed next to the current video and chooses the recommendation that is most likely to be a conspiracy 
+video. These recommendations consist of a combination of recommendations based on the content of the current
+video and the personalized recommendations of the user. By using this strategy, bots are likely to go 
+\textit{down the rabbit hole} and eventually end up in a filter bubble.
 
-\item[Video recommendations] The second-to-last strategy starts off in the same way: it chooses a random 
-conspiracy video from a dataset to watch. However, after having watched the initial video, it will start 
-watching the recommended videos displayed next to the current video. These recommendations consist of a 
-combination of recommendations based on the content of the current video and the personalized recommendations
-of the user. By using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually end 
-up in a filter bubble.
-
-\item[Homepage recommendations] Finally, the last strategy will be similar to the previous one, though with 
-one alteration: rather than choosing a recommended video from the list of recommendations next to the current
-video, it will choose a recommended video from the YouTube homepage of the account. Compared to the third
-strategy, this will lead to the user watching more personalized recommendations rather than content-based
-recommendations, possibly speeding up the creation and/or increasing the strength of the filter bubble.
+\item[4. Homepage recommendations] Finally, the last strategy is similar to the previous one, though
+with one alteration: rather than choosing a recommended video from the list of recommendations next to the 
+current video, it will choose a recommended video from the YouTube homepage of the account. Compared to the 
+third strategy, this will lead to the user watching more personalized recommendations rather than 
+content-based recommendations, possibly speeding up the creation and/or increasing the strength of the 
+filter bubble.
 
 \end{description}
+Strategy 2 was not added in order to study the formation of filter bubbles, since it was unlikely that a 
+filter bubble would come from this strategy. Considering the video choices would be all over the place, it 
+would be difficult for the algorithm to determine the specific interest of the user. However, comparing how 
+the algorithm responds to conspiracy content in general as opposed to regular content might still yield 
+interesting results.
 
-Each strategy will be executed by five different accounts in order to decrease the probability of a 
-random streak of videos altering the result. The individual accounts will watch a total of fifteen
-videos as described by their watch strategy, for a total of three hundred videos watched by the script. 
+For strategy 3 and 4, the likelihood of a recommendation being a conspiracy video was estimated by a 
+neural network using the title, description, transcript, channel description, and channel keywords of the 
+specific video. Though this is more information than a regular user would have to their disposal, it has to 
+be kept in mind that humans are able to interpret the thumbnail of the recommendations, can have 
+foreknowledge about the channel uploading the video or the subject being mentioned in the title, etc. Thus, 
+the choice was made to allow the neural network to consider the transcript and look at general information 
+about the uploader to balance the scales. 
 
-Additionally, to simulate real-world user behavior, the average watch time for the videos will be normally
+Each strategy was executed by five different accounts in order to decrease the probability of a 
+random streak of videos altering the result. The individual accounts watched a total of fifteen
+videos as described by their watch strategy for a total of three hundred videos watched by the script. 
+
+Additionally, to simulate real-world user behavior, the average watch time for the videos was normally
 distributed with a mean of 55\% and a standard deviation of 25\% \citep{park2016data, lang_2018}. The 
-watch time will not be able to exceed a value of 100, as a video cannot be watched for more than 100\%. In 
-the same vein, the clicking behavior of users will be simulated as accurately as possible. The probability 
-of a user clicking on a video at position $k$ within a given list of recommendations (its click-through 
-rate: $CTR$), will be determined using the following formula:
+watch time was not be able to exceed a value of 100 or subceed a value of 0, as a video cannot be watched 
+for more than 100\% or less than 0\%. In the same vein, the clicking behavior of users was simulated as 
+accurately as possible. Whenever none of the recommendations were predicted to be conspiracy videos, the 
+probability of a user clicking on a video at position $k$ within a given list of recommendations (its 
+click-through rate: $CTR$), was determined using the following formula:
 
 \begin{equation}
 CTR(k; N, \alpha) = \frac{1/k^\alpha}{\sum_{n=1}^{N} (1/n^\alpha)}
 \end{equation}
 
-Wherein $N$ is the total number of recommendations and $\alpha$ is the distribution's exponent value ($\alpha
-= 0.78$) \citep{zhou2010impact}. Using this formula, when considering the first twenty recommendations, the
-first recommendation will have a click-through rate of approximately 20.6\%, after which the CTR quickly
-decreases, until a probability of 1.9\% at the twentieth recommendation. 
+Wherein $N$ is the total number of recommendations and $\alpha$ is the distribution's exponent value 
+($\alpha = 0.78$) \citep{zhou2010impact}. Using this formula, when considering the first twenty 
+recommendations, the first recommendation will have a click-through rate of approximately 20.6\%, after 
+which the CTR quickly decreases, until a probability of 1.9\% at the twentieth recommendation. 
 
 \subsubsection{Running the bots}
 After the accounts were logged in, they started watching YouTube videos according to their watch
@@ -151,16 +161,15 @@ recommendations they had after each video:
 \linenumbers
 
 \noindent Running the script for all twenty bots resulted in two different datasets: the first containing
-the videos watched by the bots, including their view count, likes/dislikes, and upload date; and one 
-containing the homepage recommendations for all bots, after each number of videos watched.
-To determine the influence of the watch strategies on the algorithm, the recommendations were labeled as 
-being either conspiracy or non-conspiracy videos by the classifier. By then grouping all recommendations 
-by their watch strategy and the number of videos watched before them (e.g. the recommendations after the 
-third video watched by all bots with strategy one), it was possible to calculate aggregates about general
-statistics of the recommendations, such as view count and video duration, and the percentage of 
-conspiracy videos present amongst them. This lead to four groups with fifteen entries of different 
-statistics (one for each video watched). In order to find out whether any of the differences between the 
-four groups were significant at any point, a number of ANOVAs were performed. 
+the videos watched by the bots and the second containing the homepage recommendations for all bots, after 
+each number of videos watched. To determine the influence of the watch strategies on the algorithm, the 
+recommendations were labeled as being either conspiracy or non-conspiracy videos by the classifier. By then 
+grouping all recommendations by their watch strategy and the number of videos watched before them (e.g. the 
+recommendations after the third video watched by all bots with strategy one), it was possible to calculate 
+aggregates about general statistics of the recommendations, such as view count and video duration, and the 
+percentage of conspiracy videos present amongst them. This lead to four groups with fifteen entries of 
+different statistics (one for each video watched). In order to find out whether any of the differences 
+between the four groups were significant at any point, a number of ANOVAs were performed. 
 
 \subsubsection{Outputs of the experiment}
 To create the initial recommendation dataset, the bots stored the following information about their top 
@@ -176,7 +185,7 @@ data was gathered using YouTube's API. For each recommendation, the title, descr
 (dis)likes, views, video duration, channel description, and channel keywords were collected. The title, 
 description, transcript, channel description, and channel keywords were collected in order for the 
 classifier to label the videos, as will be further explained in section \ref{Machine Learning}. The other 
-features were collected in order to calculate the aggregates used for the aforementioned ANOVAs. An example of the output can be seen in \ref{fig:DF_example}.
+features were collected in order to calculate the aggregates used for the aforementioned ANOVAs. An example of the output can be seen in figure \ref{fig:DF_example}.
 
 \begin{figure}[t]
   \textbf{Example DataFrame}\par\medskip
@@ -187,6 +196,69 @@ features were collected in order to calculate the aggregates used for the aforem
 \end{figure}
 
 \subsection{Leaving the filter bubble}
+To find out how quickly different users can get out of a filter bubble after they have gotten into one,
+an additional experiment similar to the one described before was set up. This experiment however, was 
+significantly simpler. Rather than having different bots behave differently, all bots behaved the exact same
+way. After the bots adhering to strategy 2, 3, or 4 had gotten into a filter bubble, this experiment was 
+performed on them in order to see how long it takes for users adhering to different watch strategies to 
+leave a filter bubble once they find themselves in one. 
+
+\subsubsection{The setup}
+Considering the experiment studies the way in which users leave a filter bubble, only the bots that had 
+actually gotten into a filter bubble were used. This means that the first five bots, which were used as a 
+baseline, were ignored. The remaining bots went through the same starting procedure as they did in the 
+earlier experiment: the WebDriver was initialized and the bots logged into their corresponding accounts. The
+same restrictions for videos (i.e. maximum watch time) from the other experiment applied. However, rather 
+than the bots watching videos adhering to their original strategy, all bots watched random non-conspiracy 
+videos from the dataset. Once again, after each video, the bots stored their homepage recommendations. 
+Through doing so, it became possible to see how many videos would have to be watched, for each bot, before 
+their recommendations started looking similar to that of the baseline again. Thus, the following script was 
+created:
+
+\vspace{0.25in}
+
+\nolinenumbers
+
+\begin{algorithm}[H]
+ \KwData{User information and a video dataset}
+ \KwResult{The watched videos and homepage recommendations of the user}
+ 
+ \vspace{0.075in}
+
+ \For{fifteen bots}{
+    initialize WebDriver\;
+    log into Google account\;
+    \vspace{0.05in}
+    
+     \For{fifteen videos}{
+       pick a random non-conspiracy video to watch\;
+       determine how long it will get watched\;
+       go to the link\;
+       \vspace{0.05in}
+       get video metadata and store for overview of watched videos\;
+       watch video for given amount of time\;
+       \vspace{0.05in}
+       go to YouTube homepage\;
+       store current recommendations for overview\;
+     }
+     
+ }
+ \vspace{0.05in}
+ \textbf{return} watched videos and homepage recommendations\;
+ \caption{Getting out of a filter bubble}
+\end{algorithm}
+
+\vspace{0.25in}
+
+\linenumbers
+
+\noindent After the script had been run, the same steps were taken as in the previous experiment: the 
+title, description, transcript, channel description, and channel keywords of each recommendation
+on were downloaded, after which the classifier predicted whether or not each recommendations was a 
+conspiracy video. Then, the recommendations were grouped by watch strategy and number of videos watched. In
+doing so, the results could be used to determine how quickly the recommendations for each watch strategy 
+returned back to normal. By then analysing the results again using ANOVAs, the \textit{strength} (or 
+\textit{inescapability}) of the filter bubbles created by different watch strategies could be measured.
 
 \subsection{Machine learning} \label{Machine Learning}
 \subsubsection{Data gathering}
@@ -216,16 +288,16 @@ multiple steps were taken in order to clean the data. Firstly, the two classes (
 non-conspiracy) were balanced, so that the classifier would not develop a bias for non-conspiracy
 videos. Rather than opting for balancing the two classes through the use of class-weights (a technique
 where weights are attributed to classes, thereby telling the classifier that getting a prediction
-correct for a certain, underrepresented class is more important), the choice
-was made to under-sample the data in order to equalize both classes (both containing 22.156 videos, for
-a total of 44.312 videos) \citep{lemaitre2017imbalanced, sun2006boosting}. As there was plenty of data
-in the dataset, under-sampling was more convenient than implementing class-weights. After both classes
-had been balanced, the text for each video had to be translated into English. Since the original dataset
-by \citet{ledwich2019algorithmic} also contained channels by non-English speakers, these videos had to
-be automatically translated. Then, a few common cleaning methods were applied: all text was converted to
-lowercase, after which special characters, such as emojis were removed, whereafter stop words were
-removed and all words were stemmed using the porter stemmer \citep{karaa2013new}. Finally, each video
-was TF-IDF vectorized to allow the classifiers to function.
+correct for a certain, underrepresented class is more important), the choice was made to under-sample the 
+data in order to equalize both classes (both containing 22.156 videos, for a total of 44.312 videos) 
+\citep{lemaitre2017imbalanced, sun2006boosting}. As there was plenty of data in the dataset, under-sampling 
+was more convenient than implementing class-weights. After both classes had been balanced, the text for each
+video had to be translated into English. Since the original dataset by \citet{ledwich2019algorithmic} also 
+contained channels by non-English speakers, these videos had to be automatically translated. Then, a few 
+common cleaning methods were applied: all text was converted to lowercase, after which special characters, 
+such as emojis were removed, whereafter stop words were removed and all words were stemmed using the porter 
+stemmer \citep{karaa2013new}. Finally, each video was TF-IDF vectorized to allow the classifiers to 
+function.
 
 \subsubsection{Performance optimization}
 After splitting the dataset into a training, test, and validation set, the hyperparameters of each
@@ -236,12 +308,12 @@ precision, which shows what part of the positive predictions were correct; and t
 the harmonic mean of the recall and precision \citep{sokolova2009systematic}. For each classifier,
 different configurations of hyperparameters (such as the kernel and the penalty-parameter) were
 systemically tested - each possible combination was tried. The classifiers were trained on the training set
-and the optimal hyperparameters were determined based on the performance of the classifiers on the validation
-set. By saving these performance measures for every configuration, for every classifier, the optimal
-configuration for every classifier could be determined. Lastly, the classifiers were equipped with their
-optimal hyperparameters and then tested for the final time on the test set. By comparing the performance
-of every optimally configured classifier on the test set, the best-performing classifier could be chosen
-\citep{reitermanova2010data}. 
+and the optimal hyperparameters were determined based on the performance of the classifiers on the 
+validation set. By saving these performance measures for every configuration, for every classifier, the 
+optimal configuration for every classifier could be determined. Lastly, the classifiers were equipped with 
+their optimal hyperparameters and then tested for the final time on the test set. By comparing the 
+performance of every optimally configured classifier on the test set, the best-performing classifier could 
+be chosen \citep{reitermanova2010data}. 
 
 Additionally, the added value of using a machine learning ensemble was measured. By having each
 classifier make a prediction for all videos in the dataset, a new dataset was created, wherein the

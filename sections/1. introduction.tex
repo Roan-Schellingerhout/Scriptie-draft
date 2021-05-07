@@ -21,26 +21,32 @@ content to thrive, this research will investigate how quickly the algorithm deve
 conspiracy video; in other words: how many videos a user needs to watch before they get sent 
 \textit{down the rabbit hole}. 
 
-This research takes inspiration from the Dutch television program \textit{Zondag met Lubach}, where a
-similar idea was executed on a smaller scale \citep{lubach_2020}. Lubach's experiment consisted of 
-creating a new YouTube account on a never-used laptop, after which the account was used to watch a few 
-(recommended) conspiracy videos, to see how this would affect the YouTube homepage of the account. After
-a mere three videos, the homepage of the account was filled to the brim with conspiracy content, mostly 
-having to do with the coronavirus. The extremely interesting results that came from this 
-micro-experiment formed the motivation to research this phenomenon more extensively. 
+This research is based on the assumption that YouTube's recommender system is susceptible to the creation of 
+filter bubbles. This concept, coined by \citet{pariser2011filter}, has been studied in-depth on many social 
+media websites, YouTube included. While results vary slightly, the common finding is that YouTube 
+recommendations do indeed lead to filter bubbles and that extremist and conspiracy content is more likely to 
+do so \citep{o2013extreme, bryant2020youtube, ledwich2019algorithmic}. This effect can lead to the 
+radicalization of impressionable users, with deleterious consequences. However, an important factor herein is
+how quickly a user's recommendations turn into a bubble. If the user has enough time to be exposed to other 
+types of content, they might stray away from the more extreme, preventing them from adopting a potentially 
+harmful view \citep{bozdag2015breaking}. That is why this research looks at how \textit{quickly} a user could
+end up in a filter bubble on YouTube. To do so, brand-new accounts will be made to watch YouTube videos 
+according to different watch strategies; after each video watched, the recommendations of the user will be 
+labeled as being either conspiracy content or regular content by a machine learning classifier, to determine 
+whether or not the user is in a bubble. 
 
 \subsection{Research question}
-To research this subject, the following research question has been formulated:
+For this research the following research question has been formulated:
 \textit{What is the impact of different watch strategies on the number of conspiracy videos that have to
-be watched until a user's YouTube-recommendations start preferring conspiracy content?} In this scenario,
+be watched until a user's YouTube recommendations start preferring conspiracy content?} In this scenario,
 'preferring' will be defined as the situation in which the amount of conspiracy videos present in the
 recommendations is significantly higher than that of the baseline.
 
 To assist in answering the research question, the following sub-questions will be answered:
 \begin{itemize}
-    \item How do different watch strategies on YouTube influence the type of content that is recommended to a user?
-    \item How long does it take for a YouTube recommendations to stop preferring conspiracy videos, once they have started doing so?
-    \item What type of classifier performs the best when it comes to labeling conspiracy videos on YouTube?
+    \item How do different watch strategies on YouTube influence the type of conspiracy content that is recommended to a user?
+    \item How long does it take for YouTube recommendations to stop preferring conspiracy videos, once they have started doing so?
+    \item What type of classifier is suitable for labeling conspiracy videos on YouTube?
 \end{itemize}
 
 \end{document}
