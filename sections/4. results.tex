@@ -30,10 +30,25 @@
         \item typical example of a cold-start problem;
     \end{itemize}
     \item The average duration of videos is higher for the conspiracy strategies, but it seems somewhat random.
-    
 \end{itemize}
 
+\begin{figure}[ht]
+  \textbf{Conspiracy recommendations}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/similarity.pdf}
+  \caption{The similarity of recommended videos after each number of videos watched}
+  \label{fig:similarities}
+\end{figure}
+
 \subsection{Leaving the filter bubble}
+
+\begin{figure}[!b]
+  \textbf{Conspiracy recommendations}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy_recs_2.pdf}
+  \caption{The percentage of conspiracy recommendations after each number of videos per strategy while attempting to leave the filter bubble}
+  \label{fig:con_recs_2}
+\end{figure}
 
 \begin{itemize}
     \item The number of conspiracy recommendations drops quickly, but keeps hovering a fair amount above baseline;
@@ -47,7 +62,7 @@
 
 \subsection{Machine learning}
 
-\begin{figure}[t!]
+\begin{figure}[ht]
   \textbf{Classifier performance}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/classifier_results.pdf}
