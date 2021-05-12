@@ -5,9 +5,45 @@
 
 \section{Results}
 
+
+
 \subsection{The recommended content}
 
+\begin{figure}[ht]
+  \textbf{Conspiracy recommendations}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy_recs.pdf}
+  \caption{The percentage of conspiracy recommendations after each number of videos per strategy}
+  \label{fig:con_recs}
+\end{figure}
+
+\begin{itemize}
+    \item All strategies except for the baseline lead to filter bubbles;
+    \begin{itemize}
+        \item strategy 4 had the biggest bubble;
+        \item strategy 2 and 3 do not differ all too much, which is interesting;
+        \item seems like YouTube sort of 'caps' the amount of conspiracy videos on the homepage, as each time a new height is reached, the number starts decreasing;
+    \end{itemize}
+    \item All strategies except the baseline lead to a lower diversity of content;
+    \item Average views drop rapidly when a user starts watching content, regardless of the strategy;
+    \begin{itemize}
+        \item typical example of a cold-start problem;
+    \end{itemize}
+    \item The average duration of videos is higher for the conspiracy strategies, but it seems somewhat random.
+    
+\end{itemize}
+
 \subsection{Leaving the filter bubble}
+
+\begin{itemize}
+    \item The number of conspiracy recommendations drops quickly, but keeps hovering a fair amount above baseline;
+    \begin{itemize}
+        \item This means that YouTube quickly adapts to the new content being watched, but still keeps the previous content in mind;
+        \item The amount at which it hovers, seems to be proportional to the initial value of the filter bubble: if a user gets recommended more conspiracy content at first, more of that will stay once they stop watching that type of content; 
+    \end{itemize}
+    \item The number of videos until the algorithm stops recommending conspiracy content is well over 15;
+    \item This is interesting, as a user ends up in a bubble after $\pm 5$ videos watched.
+\end{itemize}
 
 \subsection{Machine learning}
 

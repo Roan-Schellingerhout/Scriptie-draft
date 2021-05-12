@@ -169,7 +169,7 @@ recommendations after the third video watched by all bots with strategy one), it
 aggregates about general statistics of the recommendations, such as view count and video duration, and the 
 percentage of conspiracy videos present amongst them. This lead to four groups with fifteen entries of 
 different statistics (one for each video watched). In order to find out whether any of the differences 
-between the four groups were significant at any point, a number of ANOVAs were performed. 
+between the groups were significant at any point, a number of independent sample t-tests were performed. 
 
 \subsubsection{Outputs of the experiment}
 To create the initial recommendation dataset, the bots stored the following information about their top 
@@ -257,8 +257,9 @@ title, description, transcript, channel description, and channel keywords of eac
 on were downloaded, after which the classifier predicted whether or not each recommendations was a 
 conspiracy video. Then, the recommendations were grouped by watch strategy and number of videos watched. In
 doing so, the results could be used to determine how quickly the recommendations for each watch strategy 
-returned back to normal. By then analysing the results again using ANOVAs, the \textit{strength} (or 
-\textit{inescapability}) of the filter bubbles created by different watch strategies could be measured.
+returned back to normal. By then analysing the results again using independent sample t-tests, the 
+\textit{strength} (or \textit{inescapability}) of the filter bubbles created by different watch strategies 
+could be measured.
 
 \subsection{Machine learning} \label{Machine Learning}
 \subsubsection{Data gathering}
