@@ -47,16 +47,17 @@ chooses a random conspiracy video from a dataset to watch. However, it then watc
 videos in the dataset (based on cosine similarity) in order to allow the algorithm to get a feel for the 
 user's interests. After watching those five initial videos, it starts looking at the recommended videos 
 displayed next to the current video and chooses the recommendation that is most likely to be a conspiracy 
-video. These recommendations consist of a combination of recommendations based on the content of the current
-video and the personalized recommendations of the user. By using this strategy, bots are likely to go 
-\textit{down the rabbit hole} and eventually end up in a filter bubble.
+video (out of the first twenty recommendations). These recommendations consist of a combination of 
+recommendations based on the content of the current video and the personalized recommendations of the 
+user. By using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually end up in
+a filter bubble.
 
 \item[4. Homepage recommendations] Finally, the last strategy is similar to the previous one, though
-with one alteration: rather than choosing a recommended video from the list of recommendations next to the 
-current video, it will choose a recommended video from the YouTube homepage of the account. Compared to the 
-third strategy, this will lead to the user watching more personalized recommendations rather than 
-content-based recommendations, possibly speeding up the creation and/or increasing the strength of the 
-filter bubble.
+with one alteration: rather than choosing a recommended conspiracy video from the list of recommendations 
+next to the current video, it will choose a recommended video from the YouTube homepage of the account 
+(again out of the first twenty recommendations). Compared to the third strategy, this will lead to the user
+watching more personalized recommendations rather than content-based recommendations, possibly speeding up 
+the creation and/or increasing the strength of the filter bubble.
 
 \end{description}
 Strategy 2 was not added in order to study the formation of filter bubbles, since it was unlikely that a 
@@ -185,14 +186,16 @@ data was gathered using YouTube's API. For each recommendation, the title, descr
 (dis)likes, views, video duration, channel description, and channel keywords were collected. The title, 
 description, transcript, channel description, and channel keywords were collected in order for the 
 classifier to label the videos, as will be further explained in section \ref{Machine Learning}. The other 
-features were collected in order to calculate the aggregates used for the aforementioned ANOVAs. An example of the output can be seen in figure \ref{fig:DF_example}.
+features were collected in order to calculate the aggregates used for the aforementioned ANOVAs. An example
+of the output can be seen in figure \ref{fig:dataframe}.
 
 \begin{figure}[t]
   \textbf{Example DataFrame}\par\medskip
   \centering
-  \includegraphics[keepaspectratio, width=\textwidth]{images/df_example.png}
-  \caption{An example of the experiment's output}
-  \label{fig:DF_example}
+  \includegraphics[keepaspectratio, width=\textwidth]{images/df_example.pdf}
+  \caption{An example of the experiment’s output}
+  \label{fig:dataframe}
+
 \end{figure}
 
 \subsection{Leaving the filter bubble}

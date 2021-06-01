@@ -1,9 +1,32 @@
 \begin{document}
-
 \begin{appendices}
+\setcounter{table}{1}
+\setcounter{figure}{0}
 
-\section{Hyperparameter tuning}
-\label{appendix:Hyperparameters}
+\begin{figure}[h]
+  \textbf{Conspiracy recommendation networks}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy networks.png}
+  \caption{The recommendation networks of each strategy if only conspiracy videos are kept.}
+  \label{appendix:networks}
+\end{figure}
+
+\begin{figure}
+  \textbf{Average view counts}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/views.pdf}
+  \caption{The average number of views per recommendation of each watch strategy. Each measure consists of the first twenty recommendations of the five users for each strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
+  \label{appendix:views}
+\end{figure}
+
+
+\begin{figure}
+  \textbf{Average video lengths}\par\medskip
+  \centering
+  \includegraphics[keepaspectratio, width=\textwidth]{images/durations.pdf}
+  \caption{The average duration of the recommendations of each watch strategy in seconds. Each measure consists of the first twenty recommendations of the five users for each strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
+  \label{appendix:durations}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -174,8 +197,9 @@ K &  Accuracy &  Precision &    Recall &        F1 \\
 
 \end{adjustbox}
 \end{subtable}
+\caption{Results of the classifiers on the validation set with different hyperparameters. The best score per metric is written in bold.} 
+\label{appendix:Hyperparameters}
 
-\caption{Results of the classifiers on the validation set with different hyperparameters. The best score per metric is written in bold.} \label{tab:Hyperparameters}
 \end{table}
 
 \end{appendices}
