@@ -56,7 +56,7 @@ strategies 3 and 4 have a lot of connections between the two separate classes. T
 becomes apparent when looking the networks' betweenness centrality and clustering coefficient (table 
 \ref{tab:net_metrics}). 
 
-\begin{table}[b]
+\begin{table}[t]
 \centering
 \begin{tabular}{lrr}
 \toprule
@@ -68,7 +68,8 @@ Strategy 3 &            2.198488e-06 &                0.009512 \\
 Strategy 4 &            1.136934e-04 &                0.039018 \\
 \bottomrule
 \end{tabular}
-\caption{\label{tab:net_metrics} The average betweenness centrality and clustering coefficient of each strategy's network. A node having a higher betweenness centrality indicates that it is present on more shortest paths between other nodes, meaning it is located more centrally within the network. A higher clustering coefficient indicates the network as a whole is more clustered, meaning more ties between triplets are present.}
+\caption{The average betweenness centrality and clustering coefficient of each strategy's network. A node having a higher betweenness centrality indicates that it is present on more shortest paths between other nodes, meaning it is located more centrally within the network. A higher clustering coefficient indicates the network as a whole is more clustered, meaning more ties between triplets are present.}
+\label{tab:net_metrics}
 \end{table}
 
 \begin{table}
@@ -106,7 +107,7 @@ outgoing recommendations could not be stored). Yet, even with these missing edge
 and betweenness centrality of strategies 3 and 4 end up being higher than those of strategies 1 and 2, as can be
 seen in table \ref{tab:sub-net_metrics}. 
 
-\begin{table}[h]
+\begin{table}
 \centering
 \begin{tabular}{lrr}
 \toprule
@@ -132,65 +133,62 @@ Strategy 4 &                0.000747 &                0.058816 \\
 \newpage
 
 \subsubsection{Characteristics of the recommended content}
-\begin{figure}
-  \textbf{Cosine similarity of recommendations}\par\medskip
+\begin{figure}[t]
+  \textbf{Cosine similarity of conspiracy recommendations}\par\medskip
   \centering
-  \includegraphics[keepaspectratio, width=\textwidth]{images/All sim.pdf}
-  \caption{The average cosine similarity of the homepage recommendations per strategy after each number of videos watched (based on the TF-IDF representations of the recommendations). Each measure consists of the first twenty recommendations of the five users for each strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
-  \label{fig:similarities}
-
-\centering
-\begin{minipage}[b]{0.45\linewidth}
-\includegraphics[width=\textwidth]{images/Con sim.pdf}
-\caption{Cosine similarity of conspiracy videos}
-\label{fig:con_sim}
-\end{minipage}
-\quad
-\begin{minipage}[b]{0.45\linewidth}
-\includegraphics[width=\textwidth]{images/Reg sim.pdf}
-\caption{Cosine similarity of regular videos}
-\label{fig:reg_sim}
-\end{minipage}
+  \includegraphics[keepaspectratio, width=\textwidth]{images/Con sim.pdf}
+  \caption{The average ($N = 5$) cosine similarity of the homepage conspiracy recommendations per strategy after each number of videos watched (based on the TF-IDF representations of the recommendations, as described in \ref{Data cleaning}). Each measure consists of the first twenty recommendations of the five users for each strategy.}
+  \label{fig:con_similarities}
 \end{figure}
 
 
 \paragraph{Recommendation similarity}
-Every strategy, excluding the baseline, eventually led to a decreased diversity of the recommended content. The 
-similarity of the recommended content increased relatively slowly, however. When compared to the speed with 
-which the recommendations started to prefer conspiracy content, the number of videos that needed to be watched 
-until the average cosine similarity between recommendations became significantly higher than that of the 
-baseline is quite high (figure \ref{fig:similarities}). 
+A filter bubble is often paired with a decrease in information diversity \citep{nguyen2014exploring}. As a 
+result, one would expect an inverse relationship between the similarity of the recommendations of each strategy 
+and the extent to which they are in a filter bubble (i.e., the stronger the bubble, the less diverse the 
+recommendations). As is shown in figure \ref{fig:con_similarities}, this is indeed the case. While the 
+similarity of the recommended \textit{conspiracy} content increased (figure \ref{fig:con_similarities}), the 
+similarity of \textit{non-conspiracy} recommendations stably hovered between 0.05 and 0.1, showing similar 
+behaviour to that of the baseline (appendix \ref{appendix:reg_sim}).
 
-Surprisingly, strategy 2 actually was the first strategy for which the difference in content-similarity 
-became significant; considering the bots watched random conspiracy videos, it is surprising that the 
-recommendations became similar at all. However, this only lasted for two videos, after which the difference 
-became insignificant again until video nine. After having watched all fifteen videos, strategy 2 actually had 
-more similar recommendations than strategy 3, which is remarkable, considering this strategy watched random 
-(thus, seemingly unrelated) conspiracy videos. 
+Every strategy, excluding the baseline, eventually led to a decreased diversity of the recommended conspiracy 
+content. The similarity increased relatively slowly, however, when compared to the speed with which the 
+different strategies ended up in filter bubbles. Only after seven to eight videos did all the different 
+strategies start showing a clear increase, while it took the strategies only a handful of videos to end up 
+in a bubble.
 
-Strategy 3 took the longest for the difference compared to baseline to become significant. While its 
-similarity skyrocketed after video six, this high value was caused by a single outlier, causing it not 
-to be significant. Eventually, the other values caught up to the outlier to some degree, causing the result 
-to become significant after all. Still, even then is the similarity lower than that of strategy 2. 
+While strategy 1 showed comparable behaviour to the other strategies initially, its similarity values soon 
+flat-lined. This was predominantly caused by the fact that, in figure \ref{fig:con_similarities}, only the 
+conspiracy videos are compared. Since strategy 1 oftentimes did not have any conspiracy videos within its 
+recommendations, there were no videos present to be compared, thus leading to a non-existing similarity. 
 
-Strategy 4 took slightly longer than strategy 2 to show a significant difference. However, this significance 
-never disappeared afterwards. Strategy 4's similarity increased in two separate bursts of quick growth, 
-both followed by a slowdown. After fifteen videos, strategy 4's average similarity barely outperformed 
-that of strategy 2, although this difference is insignificant ($p > 0.05$).
+The other strategies all showed approximately the same trend. For the first few videos, the similarity values 
+stayed close to normal; however, after about six videos the similarity between conspiracy recommendations 
+started increasing steadily, eventually evening out around 0.125. Considering the non-conspiracy recommendations
+of all strategies had similarity values that stayed more-or-less the same throughout all fifteen videos, the 
+trend of \textit{all} recommendations was similar to that of the conspiracy recommendations, albeit with 
+slightly lower values (appendix \ref{appendix:all_sim}).
 
 \paragraph{View count}
-The average popularity of recommended videos dropped quickly for all strategies, including the baseline. For 
-all strategies, the average view count of recommendations started at more than ten million. This number then 
-rapidly decreased, already dropping into the single millions or hundreds of thousands after five videos
-watched. Thus, YouTube starts by recommending very popular content, as that is most likely to cater to the 
-largest audience. However, after the user has watched a few videos, thereby giving the algorithm a better
+As a user watches more videos, the algorithm will get a better understanding of their preferences. This would, 
+in theory, allow it to recommend more fine-tuned (and thus less generic) content. Because of this, it was 
+expected that the average number of views (i.e. the popularity) of recommendations would decrease, the more 
+videos a user watched. This hypothesis was confirmed by the experiment; the average popularity of recommended
+videos dropped quickly for all strategies, including the baseline (appendix \ref{appendix:views}). For all
+strategies, the average view count of recommendations started at more than ten million. This number then rapidly
+decreased, already dropping into the single millions or hundreds of thousands after five videos watched. Thus,
+it was confirmed that YouTube starts by recommending very popular content, as that is most likely to cater to
+the largest audience. However, after the user has watched a few videos, thereby giving the algorithm a better
 idea of their interests, the recommendations become more personalized and therefore less generic. 
 
 \paragraph{Video duration}
-There seemed to be no trend in the average duration of the recommended videos for any of the strategies. For 
-each strategy, the average length of the recommended videos stayed between three and ten minutes, spiking up 
-or down seemingly at random. Detailed graphs of the average view count and duration of recommendations can be
-found in appendix \ref{appendix:views}.
+Lastly, it was hypothesized that the average duration of recommendations would increase as the filter bubbles
+became stronger. Considering that the YouTube algorithm optimizes for expected watch time, rather than expected
+user satisfaction, it would make sense that recommendations would end up consisting of increasingly longer
+videos, as those would garner more watch time. However, there seemed to be no trend in the average duration of
+the recommended videos for any of the strategies (appendix \ref{appendix:durations}). For each strategy, the
+average length of the recommended videos stayed between three and ten minutes, spiking up or down seemingly at
+random.
 
 \subsection{Leaving the filter bubble}
 
