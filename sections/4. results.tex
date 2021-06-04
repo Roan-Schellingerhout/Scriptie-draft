@@ -17,35 +17,40 @@ support-vector machine was chosen to do the predictions, can be read in section 
   \textbf{Conspiracy recommendations}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy_recs.pdf}
-  \caption{The percentage of conspiracy recommendations after each number of videos watched per strategy. Each measure is based on the top twenty recommendations of the five accounts for the strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
+  \caption[]{The average ($N=5$) percentage of conspiracy recommendations after each number of videos watched per strategy. Each measure is based on the top twenty (20) recommendations of the five accounts for the strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.\footnotemark}
   \label{fig:con_recs}
 \end{figure}
+
+\footnotetext{Significance for each measure was tested using multiple independent-samples t-tests. The tests compared the five percentage values after each number of videos watched per strategy to the five percentage values of the baseline (strategy 1) at that same number of videos watched. The tests were done for each strategy individually.}
 
 All strategies, excluding the baseline, led to an increased number of conspiracy recommendations on the 
 user's homepage. For all strategies, this increase was significant, meaning filter bubbles were indeed being 
 created. However, the strategies all behaved differently, as can be seen in figure \ref{fig:con_recs}. 
 
-Strategy 2 took the longest out of all the strategies to get into a filter bubble. Only after having watched 
-six videos did the difference between it and the baseline become significant. After having increased 
-significantly, the percentage of conspiracy videos being recommended to the users of strategy 2 kept steadily 
-growing, eventually plateauing at about 42\%. 
+Strategy 2 (random conspiracy videos) took the longest out of all the strategies to get into a filter bubble. 
+Only after having watched six videos did the difference between it and the baseline become significant. After 
+having increased significantly, the percentage of conspiracy videos being recommended to the users of strategy 2
+kept steadily growing, eventually plateauing at 42\%. 
 
-Strategy 3 got into a bubble the quickest. After watching only three videos did the difference compared to
-baseline become significant. However, following this head start, the increase came to a halt rather quickly. 
-After reaching its peak of 45\% at nine videos watched, the percentage of conspiracy recommendations started 
-to decline again, eventually settling around 35\%. Though most values are slightly higher, strategy 3's 
-course mimics that of strategy 2 until the decline. 
+Strategy 3 (top conspiracy recommendation next to the watched video) got into a bubble the quickest. After 
+watching only three videos did the difference compared to baseline become significant. However, following this 
+head start, the increase came to a halt rather quickly. After reaching its peak of 46\% at nine videos watched, 
+the percentage of conspiracy recommendations started to decline again, eventually settling around 35\%. Though 
+most values are slightly higher, strategy 3's course mimics that of strategy 2 until the decline. 
 
-Strategy 4 took slightly longer to get into a filter bubble than strategy 3. However, considering that these 
-strategies are identical up until video five and the difference between the two strategies was insignificant 
-($p > 0.05$), this dissimilarity is negligible. As soon as homepage recommendations started getting watched, 
-the percentage of conspiracy recommendations increased drastically, reaching a peak of around 60\%. Similarly
-to strategy 3, once the number of conspiracy recommendations reached a peak, it was followed by a decrease. 
+Strategy 4 (top conspiracy recommendation on the YouTube homepage) took slightly longer to get into a filter 
+bubble than strategy 3. However, considering that these strategies are identical up until video five and the 
+difference between the two strategies was insignificant ($p > 0.05$), this dissimilarity is negligible. As soon 
+as homepage recommendations started getting watched, the percentage of conspiracy recommendations increased 
+drastically, reaching a peak of 60.8\%. Similarly to strategy 3, once the number of conspiracy recommendations 
+reached a peak, it was followed by a decrease. 
 
 To better understand how the different strategies affected the recommendations provided by the algorithm, a 
-directed network of each strategy was created and analyzed. In this network, an edge between videos 
-indicates the second video being present in the list of homepage recommendations provided after watching the 
-first video. The different networks are displayed in figure \ref{fig:rec_net}. It can be seen that strategies
+directed network of each strategy was created and analyzed. For each strategy, the networks is constructed as 
+follows: the set of nodes consists of all videos watched by the five accounts of the strategy, plus, for every 
+watched video $V$ the top twenty homepage recommendations that were present after watching $V$. An edge between 
+two nodes $V1$ and $V2$ indicates that for at least one bot, $V2$ was recommended directly after watching $V1$. 
+The different networks are displayed in figure \ref{fig:rec_net}. It can be seen that strategies
 1 and 2 have barely any cross-class edges (strategy 1 has two in total, strategy 2 has zero), while 
 strategies 3 and 4 have a lot of connections between the two separate classes. This stronger connection also 
 becomes apparent when looking the networks' betweenness centrality and clustering coefficient (table 
@@ -78,8 +83,10 @@ Strategy 3 &  0.185714 &  0.663043 &  0.336957 &  0.814286 \\
 Strategy 4 &  0.105263 &  0.560673 &  0.439327 &  0.894737 \\
 \bottomrule
 \end{tabular}
-\caption{\label{tab:cond-probs} Conditional probabilities of cross- and within-class edges for each network. Values indicate the probability of an edge going to a class, given it starts in another (in the form: $P(end \mid start)$.}
+\caption[]{\label{tab:cond-probs} Conditional probabilities of cross- and within-class edges for each network. Values indicate the probability of an edge going to a class, given it starts in another (in the form: $P(end \mid start)$).\footnotemark}
 \end{table}
+
+\footnotetext{In other words, the values represent the conditional, class-dependent out-degrees of the nodes. The probabilities therefore can be interpreted as the likelihood of a node belonging to a certain class having an outgoing edge to a node of the same or opposite class.}
 
 When looking at the conditional probabilities of cross- and within-class edges per network (table 
 \ref{tab:cond-probs}), it can be seen that regardless of the strategy, regular videos are highly likely to 
@@ -94,9 +101,9 @@ When solely looking at the conspiracy recommendations of each strategy, it once 
 recommendations of strategies 3 and 4 are connected more strongly than those of strategies 1 and 2 (appendix 
 \ref{appendix:networks}). However, these networks are somewhat deceiving, as an edge not being present does not 
 necessarily indicate there is no link between the two nodes; it could also simply be that the recommendations 
-coming from that node were not checked (i.e., the recommendation was not clicked, hence its outgoing 
-recommendations could not be stored). Yet, even with these missing edges, the clustering coefficient and 
-betweenness centrality of strategies 3 and 4 end up being higher than those of strategies 1 and 2, as can be 
+coming from that node were not checked (i.e., the recommendation was not chosen to be watched, hence its 
+outgoing recommendations could not be stored). Yet, even with these missing edges, the clustering coefficient 
+and betweenness centrality of strategies 3 and 4 end up being higher than those of strategies 1 and 2, as can be
 seen in table \ref{tab:sub-net_metrics}. 
 
 \begin{table}[h]
@@ -118,7 +125,7 @@ Strategy 4 &                0.000747 &                0.058816 \\
   \textbf{The recommendation network of each strategy}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/recommendation networks.png}
-  \caption{The networks of recommendations of each strategy. Vertices on the left indicate regular (non-conspiracy) videos, vertices in the middle are the videos that were actually watched by the bots, and vertices on the right are conspiracy videos. An edge not being present does not always indicate a link between videos was not present, as not all videos were clicked (and thus not all links could be checked).}
+  \caption{The networks of recommendations of each strategy. Nodes on the left indicate regular (non-conspiracy) recommendations, nodes in the middle indicate the 75 videos that were watched by the bots (fifteen videos, times five bots), and nodes on the right are conspiracy recommendations. A node can be present in both the middle and either the left/right group, as some of the recommendations were watched by the bots, therefore also counting as watched videos. An edge not being present does not always indicate a link between videos was not present, as not all recommendations were watched (and thus not all links could be checked).}
   \label{fig:rec_net}
 \end{figure}
 
@@ -126,13 +133,28 @@ Strategy 4 &                0.000747 &                0.058816 \\
 
 \subsubsection{Characteristics of the recommended content}
 \begin{figure}
-  \textbf{Conspiracy recommendations}\par\medskip
+  \textbf{Cosine similarity of recommendations}\par\medskip
   \centering
-  \includegraphics[keepaspectratio, width=\textwidth]{images/similarity.pdf}
-  \caption{The average cosine similarity of the homepage recommendations per strategy after each number of videos watched. Each measure consists of the first twenty recommendations of the five users for each strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
+  \includegraphics[keepaspectratio, width=\textwidth]{images/All sim.pdf}
+  \caption{The average cosine similarity of the homepage recommendations per strategy after each number of videos watched (based on the TF-IDF representations of the recommendations). Each measure consists of the first twenty recommendations of the five users for each strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
   \label{fig:similarities}
+
+\centering
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[width=\textwidth]{images/Con sim.pdf}
+\caption{Cosine similarity of conspiracy videos}
+\label{fig:con_sim}
+\end{minipage}
+\quad
+\begin{minipage}[b]{0.45\linewidth}
+\includegraphics[width=\textwidth]{images/Reg sim.pdf}
+\caption{Cosine similarity of regular videos}
+\label{fig:reg_sim}
+\end{minipage}
 \end{figure}
 
+
+\paragraph{Recommendation similarity}
 Every strategy, excluding the baseline, eventually led to a decreased diversity of the recommended content. The 
 similarity of the recommended content increased relatively slowly, however. When compared to the speed with 
 which the recommendations started to prefer conspiracy content, the number of videos that needed to be watched 
@@ -156,6 +178,7 @@ never disappeared afterwards. Strategy 4's similarity increased in two separate 
 both followed by a slowdown. After fifteen videos, strategy 4's average similarity barely outperformed 
 that of strategy 2, although this difference is insignificant ($p > 0.05$).
 
+\paragraph{View count}
 The average popularity of recommended videos dropped quickly for all strategies, including the baseline. For 
 all strategies, the average view count of recommendations started at more than ten million. This number then 
 rapidly decreased, already dropping into the single millions or hundreds of thousands after five videos
@@ -163,6 +186,7 @@ watched. Thus, YouTube starts by recommending very popular content, as that is m
 largest audience. However, after the user has watched a few videos, thereby giving the algorithm a better
 idea of their interests, the recommendations become more personalized and therefore less generic. 
 
+\paragraph{Video duration}
 There seemed to be no trend in the average duration of the recommended videos for any of the strategies. For 
 each strategy, the average length of the recommended videos stayed between three and ten minutes, spiking up 
 or down seemingly at random. Detailed graphs of the average view count and duration of recommendations can be
@@ -171,22 +195,33 @@ found in appendix \ref{appendix:views}.
 \subsection{Leaving the filter bubble}
 
 \begin{figure}[t]
-  \textbf{Conspiracy recommendations}\par\medskip
+  \textbf{Conspiracy recommendations when leaving the filter bubble}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy_recs_2.pdf}
   \caption{The percentage of conspiracy recommendations after each number of videos watched per strategy while trying to escape a filter bubble. Each measure is based on the top twenty recommendations of the five accounts for the strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.}
   \label{fig:con_recs_2}
 \end{figure}
 
-\begin{itemize}
-    \item The number of conspiracy recommendations drops quickly, but keeps hovering a fair amount above baseline;
-    \begin{itemize}
-        \item This means that YouTube quickly adapts to the new content being watched, but still keeps the previous content in mind;
-        \item The amount at which it hovers, seems to be proportional to the initial value of the filter bubble: if a user gets recommended more conspiracy content at first, more of that will stay once they stop watching that type of content; 
-    \end{itemize}
-    \item The number of videos until the algorithm stops recommending conspiracy content is well over 15;
-    \item This is interesting, as a user ends up in a bubble after $\pm 5$ videos watched.
-\end{itemize}
+While it took only a handful of videos before a user's recommendations started preferring conspiracy content, 
+undoing this preference required far more videos to be watched. While the algorithm quickly adjusted to the 
+new type of content being watched, it did not stop recommending conspiracy content, even after the users had
+watched fifteen non-conspiracy videos (figure \ref{fig:con_recs_2}). 
+
+For all strategies, the percentage of conspiracy recommendations rapidly decreased from its initial value. 
+However, the number of conspiracy recommendations soon leveled-out for all three strategies at a value still 
+significantly higher than that of the baseline. In other words, while the algorithm is quick to reflect a change
+in users' watching behaviour, it does not 'forget' what has been watched in the past for quite some time. 
+
+Strategy 2 and 3 decreased by approximately the same amount, although strategy 3 constantly stayed at a
+higher percentage, as that strategy's initial percentage was higher than that of strategy 2. Strategy 4 dropped
+quite a bit more than the other two strategies; it ended up with practically the same values as strategy 3, even
+though its initial value was over 20\% higher (57.9\% as opposed to 34\%). 
+
+Yet, for all three strategies did the number of conspiracy recommendations not return to baseline, even after 
+having watched all fifteen videos. Considering only three to six videos had to be watched before the users ended
+up in a filter bubble, it is quite concerning that getting out of that bubble takes several times more videos. 
+Someone can end up in a filter bubble before they even realize it, but once they are in one, it will be 
+difficult for them to get out. 
 
 \subsection{Machine learning} \label{ML_results}
 
@@ -224,8 +259,9 @@ training time. Considering the marginal performance increase, the cost outweighs
 result, when taking everything into account, the support-vector machine is the best classifier for
 labeling conspiracy videos on YouTube.
 
-Additionally, for predicting the likelihood of recommendations being conspiracy videos in real-time, as was 
-done for strategy 3 and 4, the best-performing classifier is the neural network. Here, the neural network is
-preferred over the support-vector machine, as neural networks are better optimized for providing 
+Additionally, for predicting the likelihood of recommendations being conspiracy videos in real-time, the 
+best-performing classifier is the neural network. The predicted likelihood was used to find the most-likely 
+conspiracy recommendation after each video watched, which was done for strategy 3 and 4. Here, the neural 
+network is preferred over the support-vector machine, as neural networks are better optimized for providing 
 probabilities of samples belonging to a certain class \citep{specht1990probabilistic}.
 \end{document}
