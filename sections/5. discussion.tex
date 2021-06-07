@@ -4,17 +4,61 @@
 \begin{document}
 
 \section{Discussion}
+The results indicate that the YouTube algorithm is indeed susceptible to the creation of filter bubbles, even when it
+comes to harmful content such as conspiracy videos. Through using actual YouTube accounts and making use of different
+watch strategies, it was shown that a user's individual watching behavior influences the strength of the created filter
+bubble and impacts how quickly such a bubble can emerge. In line with expectations, watching more personalized content
+on YouTube creates stronger filter bubbles and does so more quickly, while watching less personal content leads to
+weaker bubbles, which take longer to materialize. Furthermore, the findings indicate that, regardless of the strength of
+the filter bubble a user is in, leaving a filter bubble requires significantly more videos to be watched than needed to
+enter a filter bubble. Even after a user has watched fifteen unrelated videos, the algorithm is still inclined to
+recommend content based on the original filter bubble. This could indicate that the first few videos that a user
+watches on YouTube are incredibly important to the content ecosystem they will eventually end up in. If this is true, it
+will be important to disincentivize new YouTube users from consuming potentially harmful content (such as conspiracy
+videos), as that could shape the future of their recommendations. However, more research will have to be done in order
+to confirm or deny this claim. 
 
-\subsection{The filter bubbles}
-% The results indicate that the YouTube algorithm is indeed susceptible to filter bubbles. Even with content that could be as harmful as conspiracy videos, the algorithm recommends more of what the user already watched. We live in a society. Link to previous literature!
+Previous research on the topic of filter bubbles consisting of radical and conspiracy content on YouTube has shown 
+conflicting results. For example \citet{hosseinmardi2020evaluating} found no evidence of extremist filter bubbles being 
+created by the YouTube algorithm. On the other hand, \citet{roth2020tubes} and \citet{Faddoul2020ALA} did find evidence 
+supporting the claim that the YouTube algorithm is vulnerable to such filter bubbles. This discrepancy could be
+explained by the difference in approach between the research; Hosseinmardi et al. look at user behaviour indirectly
+(through a national web panel), while Roth et al. and Faddoul et al. opt for a more direct approach (actually using the
+YouTube website, although while not logged in). This research complements their research, as it shows how the algorithm behaves in a real-world scenario: having a user actually use the website, while logged in on their own account. 
 
-\subsection{Cold-start problem}
-% For each strategy, including the baseline, there was a clear example of a cold-start problem for the 
-% algorithm \citep{lam2008addressing}. This became apparent through the average popularity of the recommended 
-% content at the start of the experiment.
+Additionally, it was found that YouTube's algorithm initially recommends extremely popular, thus generic content, as no
+information is known about the user at that point. This is a typical example of a cold-start problem, wherein a
+recommender system does not yet have sufficient data about a user to give a relevant recommendation
+\citep{lam2008addressing}. Although this effect is clearly present within the YouTube recommendations, it only lasts for
+a handful of videos. 
 
-\subsection{Watch time optimization}
-% The average duration of videos is higher for the conspiracy strategies, but it seems somewhat random. --> this probably is because longer videos do not necessarily lead to more watch time: a 10 minute video being watched in its entirety is better than a 45 minute video being skipped after 4 minutes. 
+Lastly, it was expected that YouTube recommendations tend to become increasingly longer, considering the algorithm
+optimizes for watch time. While no support was found for the claim that recommendations become gradually longer, this
+does not indicate that the algorithm does not optimize for watch time. After all, recommending a ten minute video that
+the algorithm expects the user to watch in its entirety leads to more watch time than recommending a 45 minute video
+that the algorithm expected the user to abandon after a few minutes. 
 
+\subsection{Future Research}
+This research attempted to carry out the experiment in the most realistic way possible. Thus, additional insights were 
+gained into the way in which the YouTube algorithm behaves in a real-world setting. While this method requires 
+additional labour to set up (as the process of creating new accounts can be time-consuming), the ability to research the
+YouTube-algorithm in such a realistic scenario arguably outweighs the drawbacks. However, due to the required time for
+setting up additional accounts, this method is costly to apply on a large scale. As a result, the main limitation of
+this research is the fact that a fairly limited number of accounts was use. Therefore, future research using this method
+should be done on a larger scale. 
+
+Firstly, it would be interesting to create a network similar to that of figure \ref{fig:rec_net}, but instead of only 
+clicking on one recommendation after each video, a breadth-first search method could be used to find \textit{all} edges 
+present between videos. The current network shows promising differences between the strategies, even though the number 
+of observations is limited. Based on the current results, it seems that the full recommendation networks of the more
+personalized strategies will be more closely connected. Future research will have to be done to find out if this holds
+true on a larger scale. 
+
+Furthermore, the results of the second sub-question, wherein the number of videos required to leave a filter bubble was
+examined, were somewhat inconclusive. Even after fifteen videos, the users' recommendation had not yet gone back to
+normal. Future research could look into just how long it takes before a user's recommendations start looking like normal
+again after watching conspiracy content. Additionally, this experiment could be done for different types of content.
+Considering conspiracy content tends to lead to more watch time on average, YouTube's algorithm could potentially be
+more averse to stop recommending conspiracy content as opposed to different, less captivating genres. 
 
 \end{document}

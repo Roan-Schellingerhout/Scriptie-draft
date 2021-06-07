@@ -17,7 +17,7 @@ support-vector machine was chosen to do the predictions, can be read in section 
   \textbf{Conspiracy recommendations}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy_recs.pdf}
-  \caption[]{The average ($N=5$) percentage of conspiracy recommendations after each number of videos watched per strategy. Each measure is based on the top twenty (20) recommendations of the five accounts for the strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.\footnotemark}
+  \caption[]{The average ($N=5$) percentage of conspiracy recommendations after each number of videos watched per strategy. Each measure is based on the top twenty recommendations of the five accounts for the strategy. A dashed line indicates a significant difference compared to the baseline (strategy 1) at $\alpha = 0.05$.\footnotemark}
   \label{fig:con_recs}
 \end{figure}
 
@@ -126,7 +126,7 @@ Strategy 4 &                0.000747 &                0.058816 \\
   \textbf{The recommendation network of each strategy}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/recommendation networks.png}
-  \caption{The networks of recommendations of each strategy. Nodes on the left indicate regular (non-conspiracy) recommendations, nodes in the middle indicate the 75 videos that were watched by the bots (fifteen videos, times five bots), and nodes on the right are conspiracy recommendations. A node can be present in both the middle and either the left/right group, as some of the recommendations were watched by the bots, therefore also counting as watched videos. An edge not being present does not always indicate a link between videos was not present, as not all recommendations were watched (and thus not all links could be checked).}
+  \caption{The networks of recommendations of each strategy. Nodes on the left indicate regular (non-conspiracy) recommendations, nodes in the middle indicate the videos that were watched by the bots (fifteen videos, times five bots for strategy 1 and 2; and five videos, times five bots for strategy 3 and 4), and nodes on the right are conspiracy recommendations. Nodes with outgoing edges on the left/right side are videos that were recommended and then chosen to be watched, thus also having outgoing edges. An edge not being present does not necessarily indicate a link between videos was not present, as not all recommendations were watched (and thus not all links could be checked).}
   \label{fig:rec_net}
 \end{figure}
 
@@ -187,8 +187,7 @@ became stronger. Considering that the YouTube algorithm optimizes for expected w
 user satisfaction, it would make sense that recommendations would end up consisting of increasingly longer
 videos, as those would garner more watch time. However, there seemed to be no trend in the average duration of
 the recommended videos for any of the strategies (appendix \ref{appendix:durations}). For each strategy, the
-average length of the recommended videos stayed between three and ten minutes, spiking up or down seemingly at
-random.
+average length of the recommended videos stayed between three and ten minutes, spiking up or down sporadically.
 
 \subsection{Leaving the filter bubble}
 
@@ -232,33 +231,33 @@ difficult for them to get out.
 \end{figure}
 
 The hyperparameter tuning led to impressive scores for all classifiers. When making predictions for the
-test set, the best-performing classifier is the support-vector machine making use of the Radial Basis
-Function (RBF) kernel and a penalty parameter (C-value) of 10. The SVM is tied for F1-score with the neural 
+test set, the best-performing classifier was the support-vector machine making use of the Radial Basis
+Function (RBF) kernel and a penalty parameter (C-value) of 10. The SVM was tied for F1-score with the neural 
 network using the identity activation function, with 10 hidden layers of 10 neurons. Ridge regression with a 
-sparse-cg solver and penalty (alpha) value of 0.1 takes the third place, very closely followed by logistic 
+sparse-cg solver and penalty (alpha) value of 0.1 took third place, very closely followed by logistic 
 regression with an L2 penalty, a penalty (C) value of 20 and a newton-cg solver. The worst-performing 
-classifier is also the simplest of the bunch: the k-nearest neighbors classifier (K=1). Although its 
-performance is still formidable, it does substantially worse than the others. An overview of all metrics for 
+classifier was also the simplest of the bunch: the k-nearest neighbors classifier (K=1). Although its 
+performance was still formidable, it did substantially worse than the others. An overview of all metrics for 
 each classifier can be seen in figure \ref{fig:ML_scores}. The ten best-performing configurations for each
 classifier can be found in appendix \ref{appendix:Hyperparameters}.
 
-Noteworthy is the fact that the optimal ensemble actually outperforms the support-vector machine by a
-slight margin. This ensemble, consisting of the SVM, the neural network, and surprisingly, the k-nearest
-neighbor classifiers, gets slightly higher scores than the runner-up across the board. The ensemble had
+Noteworthy is the fact that the optimal ensemble actually outperformed the support-vector machine by a
+slight margin. This ensemble, consisting of the SVM, the neural network, and the k-nearest
+neighbor classifiers, got slightly higher scores than the runner-up across the board. The ensemble had
 a 16-way tie for best-performing parameters, all of which contained at least the SVM, neural network,
 and k-NN classifiers. 
 
-Though the ensemble outperforms the other classifiers, it has a significant drawback: its training time
+Though the ensemble outperformed the other classifiers, it has a significant drawback: its training time
 is significantly larger than that of the individual classifiers. Support-vector machines are infamous
 for their slowness when there is a lot of training data, and neural networks can require a lot of
 training time whenever the number of neurons gets large \citep{burges1997improving,
-kamarthi1999accelerating}. Requiring both algorithms to run will therefore require a lot of additional
+kamarthi1999accelerating}. Requiring both algorithms to run would therefore require a lot of additional
 training time. Considering the marginal performance increase, the cost outweighs the benefit. As a
 result, when taking everything into account, the support-vector machine is the best classifier for
 labeling conspiracy videos on YouTube.
 
 Additionally, for predicting the likelihood of recommendations being conspiracy videos in real-time, the 
-best-performing classifier is the neural network. The predicted likelihood was used to find the most-likely 
+best-performing classifier was the neural network. The predicted likelihood was used to find the most-likely 
 conspiracy recommendation after each video watched, which was done for strategy 3 and 4. Here, the neural 
 network is preferred over the support-vector machine, as neural networks are better optimized for providing 
 probabilities of samples belonging to a certain class \citep{specht1990probabilistic}.

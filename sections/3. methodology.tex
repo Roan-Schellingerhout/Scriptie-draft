@@ -42,15 +42,15 @@ baseline to compare the other three strategies to.
 \item[2. Random conspiracies] The second strategy is similar to the first: the 
 adhering bots watch random conspiracy videos from a dataset. 
 
-\item[3. Video recommendations] The second-to-last strategy starts off in the same way as strategy 2: it 
+\item[3. Watch-next recommendations] The second-to-last strategy starts off in the same way as strategy 2: it 
 chooses a random conspiracy video from a dataset to watch. However, it then watches the four most similar 
 videos in the dataset (based on cosine similarity) in order to allow the algorithm to get a feel for the 
 user's interests. After watching those five initial videos, it starts looking at the recommended videos 
 displayed next to the current video and chooses the recommendation that is most likely to be a conspiracy 
 video (out of the first twenty recommendations). These recommendations consist of a combination of 
 recommendations based on the content of the current video and the personalized recommendations of the 
-user. By using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually end up in
-a filter bubble.
+user. It is expected that, by using this strategy, bots are likely to go \textit{down the rabbit hole} and eventually 
+end up in a filter bubble.
 
 \item[4. Homepage recommendations] Finally, the last strategy is similar to the previous one, though
 with one alteration: rather than choosing a recommended conspiracy video from the list of recommendations 
@@ -60,12 +60,6 @@ watching more personalized recommendations rather than content-based recommendat
 the creation and/or increasing the strength of the filter bubble.
 
 \end{description}
-Strategy 2 was not added in order to study the formation of filter bubbles, since it was unlikely that a 
-filter bubble would come from this strategy. Considering the video choices would be all over the place, it 
-would be difficult for the algorithm to determine the specific interest of the user. However, comparing how 
-the algorithm responds to conspiracy content in general as opposed to regular content might still yield 
-interesting results.
-
 For strategy 3 and 4, the likelihood of a recommendation being a conspiracy video was estimated by a 
 neural network using the title, description, transcript, channel description, and channel keywords of the 
 specific video. Though this is more information than a regular user would have to their disposal, it has to 
