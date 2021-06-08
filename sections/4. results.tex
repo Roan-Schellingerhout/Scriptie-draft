@@ -126,7 +126,7 @@ Strategy 4 &                0.000747 &                0.058816 \\
   \textbf{The recommendation network of each strategy}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/recommendation networks.png}
-  \caption{The networks of recommendations of each strategy. Nodes on the left indicate regular (non-conspiracy) recommendations, nodes in the middle indicate the videos that were watched by the bots (fifteen videos, times five bots for strategy 1 and 2; and five videos, times five bots for strategy 3 and 4), and nodes on the right are conspiracy recommendations. Nodes with outgoing edges on the left/right side are videos that were recommended and then chosen to be watched, thus also having outgoing edges. An edge not being present does not necessarily indicate a link between videos was not present, as not all recommendations were watched (and thus not all links could be checked).}
+  \caption{The networks of homepage recommendations of each strategy. Nodes are videos. An edge from $V1$ to $V2$ indicates $V2$ was recommended to a user directly after watching $V1$. Blue and red nodes indicate regular and conspiracy videos, respectively. Nodes on the left are regular videos that were recommended, nodes on the right are conspiracy videos that were recommended, and videos in the middle are videos that were watched, but not recommended (i.e. from the dataset). Nodes with outgoing edges on the left/right side are videos that were recommended and then chosen to be watched, thus also having outgoing recommendations. Note that most recommendations were not watched (and thus not all possible recommendation links could be checked).}
   \label{fig:rec_net}
 \end{figure}
 
