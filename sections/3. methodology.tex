@@ -264,7 +264,7 @@ To answer the research question, it is necessary to determine which YouTube vide
 conspiracy videos. Considering the large amount of videos getting recommended, determining each video
 manually is simply not possible. There are two possible ways to solve this problem. Firstly, there is a
 dataset which contains nearly 7000 YouTube channels that have been manually labeled based on their
-political view - almost 3000 of which were labeled as conspiracy channels \citep{ledwich2019algorithmic};
+political view - almost 3000 of which were labeled as conspiracy channels \citep{ledwich2020algorithmic};
 whenever a video is made by one such channel, it can be considered a conspiracy video. However, due to
 the enormous amount of existing YouTube channels, the odds of a video being uploaded by a channel that
 is not present in this dataset are very large. For those videos, a supervised machine learning
@@ -273,7 +273,7 @@ k-nearest neighbors, support-vector machine, neural network, logistic regression
 
 In order to train these machine learning algorithms, a training dataset was created. To get a labeled
 dataset of conspiracy and non-conspiracy videos, use was made of the aforementioned channel dataset made
-by \citet{ledwich2019algorithmic}. For each channel in that dataset, the title, description, and
+by \citet{ledwich2020algorithmic}. For each channel in that dataset, the title, description, and
 transcript of the ten most recently uploaded videos were downloaded using YouTube's API. Videos uploaded
 by a conspiracy channel were then labeled as conspiracy videos, and videos uploaded by a channel from a
 different category were labeled as normal videos. Additionally, the channel description and channel
@@ -290,7 +290,7 @@ correct for a certain, underrepresented class is more important), the choice was
 data in order to equalize both classes (both containing 22.156 videos, for a total of 44.312 videos) 
 \citep{lemaitre2017imbalanced, sun2006boosting}. As there was plenty of data in the dataset, under-sampling 
 was more convenient than implementing class-weights. After both classes had been balanced, the text for each
-video had to be translated into English. Since the original dataset by \citet{ledwich2019algorithmic} also 
+video had to be translated into English. Since the original dataset by \citet{ledwich2020algorithmic} also 
 contained channels by non-English speakers, these videos had to be automatically translated. Then, a few 
 common cleaning methods were applied: all text was converted to lowercase, after which special characters, 
 such as emojis were removed, whereafter stop words were removed and all words were stemmed using the porter 
