@@ -36,13 +36,12 @@ a total of five accounts per strategy.
 
 \begin{description}
 \item[1. Random videos (baseline)] The first watch strategy is the simplest one. The bots following 
-it will watch random, non-conspiracy videos from a dataset. This watch strategy is used as the 
-baseline to compare the other three strategies to.
+it will watch random \textit{non-conspiracy} videos from a dataset (for a description of the dataset see \ref{Machine Learning}). This watch strategy is used as the baseline to compare the other three strategies to.
 
-\item[2. Random conspiracies] The second strategy is similar to the first: the 
-adhering bots watch random conspiracy videos from a dataset. 
+\item[2. Random conspiracies] The second strategy is similar to the first: the adhering bots watch random
+\textit{conspiracy} videos from the dataset. 
 
-\item[3. Watch-next recommendations] The second-to-last strategy starts off in the same way as strategy 2: it 
+\item[3. Watch-next recommendations] The penultimate strategy starts off in the same way as strategy 2: it 
 chooses a random conspiracy video from a dataset to watch. However, it then watches the four most similar 
 videos in the dataset (based on cosine similarity) in order to allow the algorithm to get a feel for the 
 user's interests. After watching those five initial videos, it starts looking at the recommended videos 
@@ -64,8 +63,8 @@ For strategy 3 and 4, the likelihood of a recommendation being a conspiracy vide
 neural network using the title, description, transcript, channel description, and channel keywords of the 
 specific video. Though this is more information than a regular user would have to their disposal, it has to 
 be kept in mind that humans are able to interpret the thumbnail of the recommendations, can have 
-foreknowledge about the channel uploading the video or the subject being mentioned in the title, etc. Thus, 
-the choice was made to allow the neural network to consider the transcript and look at general information 
+foreknowledge about the channel that is uploading the video or the subject being mentioned in the title, et cetera.
+Thus, the choice was made to allow the neural network to consider the transcript and look at general information 
 about the uploader to balance the scales. 
 
 Each strategy was executed by five different accounts in order to decrease the probability of a 
@@ -91,23 +90,20 @@ which the CTR quickly decreases, until a probability of 1.9\% at the twentieth r
 
 \subsubsection{Running the bots}
 After the accounts were logged in, they started watching YouTube videos according to their watch
-strategy. However, some restrictions were put into place to make sure the bots did not take too long
-(considering three hundred videos had to be watched in total, some limitations had to apply). For
-example, the bots were not allowed to watch videos over an hour long, nor were they allowed to watch live
-streams, as those could theoretically go on infinitely. Additionally, the random videos at the start of
-the third and fourth strategy were first manually inspected to make sure the bots would not start the
-experiment by watching a falsely flagged conspiracy video. Considering the way in which the dataset was
-created, it is possible that some videos that are flagged as conspiracy videos are, in reality, normal 
-videos. This could happen whenever a conspiracy channel uploads a regular video for once (e.g. a holiday 
-video, promotion of some product, etc.). These \textit{false positives} are far and few between, however,
-having one of them be selected as the first video for strategy three or four had to be prevented, as that
-could have greatly altered the final results. With these restrictions in mind, the following script was 
+strategy. However, some restrictions were put into place to make sure running the bots did not take too long, as
+three hundred videos had to be watched in total. For example, the bots were not allowed to watch videos over an
+hour long, nor were they allowed to watch live streams, as those could theoretically go on infinitely.
+Additionally, the random videos at the start of the third and fourth strategy were first manually inspected to make
+sure the bots would not start the experiment by watching a falsely flagged conspiracy video. Considering the way in
+which the dataset was created (see \ref{Machine Learning}), it is possible that some videos that are flagged as
+conspiracy videos are, in reality, normal videos. This could happen whenever a conspiracy channel uploads a regular
+video (e.g. a holiday video, promotion of some product, etc.). These \textit{false positives} are far and
+few between, however, having one of them be selected as the first video for strategy 3 or 4 had to be prevented, as
+that could have greatly altered the final results. With these restrictions in mind, the following script was 
 created and run for all twenty bots, keeping track of the videos they watched and the homepage 
 recommendations they had after each video:
 
 \vspace{0.25in}
-
-\nolinenumbers
 
 \begin{algorithm}[H]
  \KwData{User information and a video dataset}
@@ -153,9 +149,7 @@ recommendations they had after each video:
 
 \vspace{0.25in}
 
-\linenumbers
-
-\noindent Running the script for all twenty bots resulted in two different datasets: the first containing
+Running the script for all twenty bots resulted in two different datasets: the first containing
 the videos watched by the bots and the second containing the homepage recommendations for all bots, after 
 each number of videos watched. To determine the influence of the watch strategies on the algorithm, the 
 recommendations were labeled as being either conspiracy or non-conspiracy videos by the classifier. By then 
@@ -164,7 +158,7 @@ recommendations after the third video watched by all bots with strategy one), it
 aggregates about general statistics of the recommendations, such as view count and video duration, and the 
 percentage of conspiracy videos present amongst them. This lead to four groups with fifteen entries of 
 different statistics (one for each video watched). In order to find out whether any of the differences 
-between the groups were significant at any point, a number of independent sample t-tests were performed. 
+between the groups were significant at any point, a number of independent samples t-tests were performed. 
 
 \subsubsection{Outputs of the experiment}
 To create the initial recommendation dataset, the bots stored the following information about their top 
@@ -180,8 +174,8 @@ data was gathered using YouTube's API. For each recommendation, the title, descr
 (dis)likes, views, video duration, channel description, and channel keywords were collected. The title, 
 description, transcript, channel description, and channel keywords were collected in order for the 
 classifier to label the videos, as will be further explained in section \ref{Machine Learning}. The other 
-features were collected in order to calculate the aggregates used for the aforementioned ANOVAs. An example
-of the output can be seen in figure \ref{fig:dataframe}.
+features were collected in order to calculate the aforementioned aggregates. An example of the output can be seen
+in figure \ref{fig:dataframe}.
 
 \begin{figure}[t]
   \textbf{Example DataFrame}\par\medskip
@@ -205,7 +199,7 @@ Considering the experiment studies the way in which users leave a filter bubble,
 actually gotten into a filter bubble were used. This means that the first five bots, which were used as a 
 baseline, were ignored. The remaining bots went through the same starting procedure as they did in the 
 earlier experiment: the WebDriver was initialized and the bots logged into their corresponding accounts. The
-same restrictions for videos (i.e. maximum watch time) from the other experiment applied. However, rather 
+same restrictions for videos (e.g. maximum watch time) from the other experiment applied. However, rather 
 than the bots watching videos adhering to their original strategy, all bots watched random non-conspiracy 
 videos from the dataset. Once again, after each video, the bots stored their homepage recommendations. 
 Through doing so, it became possible to see how many videos would have to be watched, for each bot, before 
@@ -213,8 +207,6 @@ their recommendations started looking similar to that of the baseline again. Thu
 created:
 
 \vspace{0.25in}
-
-\nolinenumbers
 
 \begin{algorithm}[H]
  \KwData{User information and a video dataset}
@@ -247,16 +239,13 @@ created:
 
 \vspace{0.25in}
 
-\linenumbers
-
 \noindent After the script had been run, the same steps were taken as in the previous experiment: the 
-title, description, transcript, channel description, and channel keywords of each recommendation
-on were downloaded, after which the classifier predicted whether or not each recommendations was a 
-conspiracy video. Then, the recommendations were grouped by watch strategy and number of videos watched. In
-doing so, the results could be used to determine how quickly the recommendations for each watch strategy 
-returned back to normal. By then analysing the results again using independent sample t-tests, the 
-\textit{strength} (or \textit{inescapability}) of the filter bubbles created by different watch strategies 
-could be measured.
+title, description, transcript, channel description, and channel keywords of each recommendation were downloaded, 
+after which the classifier predicted whether or not each recommendations was a conspiracy video. Then, the 
+recommendations were grouped by watch strategy and number of videos watched. In doing so, the results could be used
+to determine how quickly the recommendations for each watch strategy returned back to normal. By then analysing the
+results again using independent samples t-tests, the \textit{strength} (or \textit{inescapability}) of the filter 
+bubbles created by different watch strategies could be measured.
 
 \subsection{Machine learning} \label{Machine Learning}
 \subsubsection{Data gathering}
@@ -278,7 +267,7 @@ transcript of the ten most recently uploaded videos were downloaded using YouTub
 by a conspiracy channel were then labeled as conspiracy videos, and videos uploaded by a channel from a
 different category were labeled as normal videos. Additionally, the channel description and channel
 keywords (which are used for targeted advertising on YouTube) were added to each video. The final
-dataset contains 65.683 unique YouTube videos, 22.156 of which are considered as conspiracy videos. 
+dataset contained 65.683 unique YouTube videos, 22.156 of which were considered conspiracy videos. 
 
 \subsubsection{Data cleaning} \label{Data cleaning}
 However, this dataset was not yet suitable for machine learning, as the data was still messy. Therefore,
@@ -286,9 +275,9 @@ multiple steps were taken in order to clean the data. Firstly, the two classes (
 non-conspiracy) were balanced, so that the classifier would not develop a bias for non-conspiracy
 videos. Rather than opting for balancing the two classes through the use of class-weights (a technique
 where weights are attributed to classes, thereby telling the classifier that getting a prediction
-correct for a certain, underrepresented class is more important), the choice was made to under-sample the 
+correct for a certain, underrepresented class is more important), the choice was made to undersample the 
 data in order to equalize both classes (both containing 22.156 videos, for a total of 44.312 videos) 
-\citep{lemaitre2017imbalanced, sun2006boosting}. As there was plenty of data in the dataset, under-sampling 
+\citep{lemaitre2017imbalanced, sun2006boosting}. As there was plenty of data in the dataset, undersampling 
 was more convenient than implementing class-weights. After both classes had been balanced, the text for each
 video had to be translated into English. Since the original dataset by \citet{ledwich2020algorithmic} also 
 contained channels by non-English speakers, these videos had to be automatically translated. Then, a few 
@@ -308,15 +297,16 @@ different configurations of hyperparameters (such as the kernel and the penalty-
 systemically tested - each possible combination was tried. The classifiers were trained on the training set
 and the optimal hyperparameters were determined based on the performance of the classifiers on the 
 validation set. By saving these performance measures for every configuration, for every classifier, the 
-optimal configuration for every classifier could be determined. Lastly, the classifiers were equipped with 
+optimal configuration of each classifier could be determined. Lastly, the classifiers were equipped with 
 their optimal hyperparameters and then tested for the final time on the test set. By comparing the 
 performance of every optimally configured classifier on the test set, the best-performing classifier could 
 be chosen \citep{reitermanova2010data}. 
 
 Additionally, the added value of using a machine learning ensemble was measured. By having each
-classifier make a prediction for all videos in the dataset, a new dataset was created, wherein the
-features were the predictions made by the different classifiers. By using all possible combinations of
-classifiers, and then having different neural networks use those features as input, a machine learning
-ensemble was created. This ensemble was then optimized in a similar way to the classifiers individually.
+classifier make a prediction for all videos in the dataset, a new dataset was created. In this new dataset, each
+sample was a video, and the features consisted the predictions made by the different classifiers. By using all
+possible combinations of the five aforementioned classifiers, and then having a neural network use those features as
+input, a machine learning ensemble was created. This ensemble was then optimized in a similar way to the classifiers
+individually.
 
 \end{document}

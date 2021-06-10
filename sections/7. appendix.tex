@@ -1,10 +1,14 @@
 \begin{document}
 \begin{appendices}
-\setcounter{table}{1}
-\setcounter{figure}{0}
+\appendix
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
+\noindent All of the data and code used for this research is publicly available on \href{https://github.com/Roan-Schellingerhout/bachelor_scriptie}{GitHub}.
+
+\section{}
 \begin{figure}[h]
-  \textbf{Conspiracy recommendation networks}\par\medskip
+  \textbf{Conspiracy recommendation network of each strategy}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/conspiracy networks.png}
   \caption{The recommendation networks of each strategy if only conspiracy videos are kept.}
@@ -12,14 +16,7 @@
 \end{figure}
 
 \begin{figure}
-\centering
-\includegraphics[width=\textwidth]{images/All sim.pdf}
-\caption{Cosine similarity of all recommendations}
-\label{appendix:all_sim}
-\end{figure}
-
-
-\begin{figure}
+\textbf{Cosine similarity (regular videos)}
 \centering
 \includegraphics[width=\textwidth]{images/Reg sim.pdf}
 \caption{Cosine similarity of regular recommendations}
@@ -27,27 +24,38 @@
 \end{figure}
 
 \begin{figure}
+\textbf{Cosine similarity (all videos)}
+\centering
+\includegraphics[width=\textwidth]{images/All sim.pdf}
+\caption{Cosine similarity of all recommendations}
+\label{appendix:all_sim}
+\end{figure}
+
+\begin{figure}[!t]
   \textbf{Average view counts}\par\medskip
   \centering
-  \includegraphics[keepaspectratio, width=\textwidth]{images/views.pdf}
+  \includegraphics[keepaspectratio, width=0.95\textwidth]{images/views.pdf}
   \caption{The average number of views per recommendation of each watch strategy. Each measure consists of the first twenty recommendations of the five users for each strategy.}
   \label{appendix:views}
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[!b]
   \textbf{Average video lengths}\par\medskip
   \centering
-  \includegraphics[keepaspectratio, width=\textwidth]{images/durations.pdf}
+  \includegraphics[keepaspectratio, width=0.95\textwidth]{images/durations.pdf}
   \caption{The average duration of the recommendations of each watch strategy in seconds. Each measure consists of the first twenty recommendations of the five users for each strategy.}
   \label{appendix:durations}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{}
+\setcounter{table}{-1}
 
 \begin{table}[ht]
+\captionsetup[subtable]{labelformat=empty}
 \begin{subtable}{\textwidth}
-\begin{adjustbox}{minipage=18cm, center}
+\begin{adjustbox}{minipage=15cm, center}
 \sisetup{table-format=-1.5}   
 \centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} cccccccc}
@@ -68,7 +76,8 @@ svm, nn, logr, knn & identity & 1         &       10 &  0.939318 &   0.948923 & 
 \bottomrule
 
 \end{tabular*}
-\caption{\label{tab:Ensemble}Ensemble.}
+\caption{Ensemble.}
+\label{tab:Ensemble}
 \end{adjustbox}
 \end{subtable}
 
@@ -76,7 +85,7 @@ svm, nn, logr, knn & identity & 1         &       10 &  0.939318 &   0.948923 & 
 
 \bigskip
 \begin{subtable}{\textwidth}
-\begin{adjustbox}{minipage=18cm, center}
+\begin{adjustbox}{minipage=15cm, center}
 \sisetup{table-format=-2}   
 \centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
@@ -95,7 +104,8 @@ svm, nn, logr, knn & identity & 1         &       10 &  0.939318 &   0.948923 & 
     rbf &    0.1 &  0.878887 &   0.878906 &  0.884521 &  0.881705 \\
 \bottomrule
 \end{tabular*}
-\caption{\label{tab:Support-vector machine}Support-vector machine.}
+\caption{Support-vector machine.}
+\label{tab:Support-vector machine}
 \end{adjustbox}
 \end{subtable}
 
@@ -103,7 +113,7 @@ svm, nn, logr, knn & identity & 1         &       10 &  0.939318 &   0.948923 & 
 
 \bigskip
 \begin{subtable}{\textwidth}
-\begin{adjustbox}{minipage=18cm, center}
+\begin{adjustbox}{minipage=15cm, center}
 \sisetup{table-format=-1.2}   
 \centering
 \begin{tabular*}{\textwidth }{c @{\extracolsep{\fill}} cccccc}
@@ -122,16 +132,19 @@ tanh       & 10     &      20 &  0.914744 &   0.920178 &  0.912039 &  0.916091 \
 logistic   & 1      &       1 &  0.913741 &   0.925516 &  0.903686 &  0.914470 \\
 \bottomrule
 \end{tabular*}
-\caption{\label{tab:Neural network}Neural network.}
+\caption{Neural network.}
+\label{tab:Neural network}
 \end{adjustbox}
 \end{subtable}
 \end{table}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
+
 \begin{table}[ht]
+\captionsetup[subtable]{labelformat=empty}
 \begin{subtable}{\textwidth}
 \ContinuedFloat
-\begin{adjustbox}{minipage=18cm, center}
+\begin{adjustbox}{minipage=15cm, center}
 \sisetup{table-format=-1.2}   
 \centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
@@ -152,7 +165,8 @@ auto        &  100.0 &  0.812437 &   0.854545 &  0.762162 &  0.805714 \\
 \bottomrule
 
 \end{tabular*}
-\caption{\label{tab:Ridge regression}Ridge regression.}
+\caption{Ridge regression.}
+\label{tab:Ridge regression}
 \end{adjustbox}
 \end{subtable}
 
@@ -160,7 +174,7 @@ auto        &  100.0 &  0.812437 &   0.854545 &  0.762162 &  0.805714 \\
 
 \bigskip
 \begin{subtable}{\textwidth}
-\begin{adjustbox}{minipage=18cm, center}
+\begin{adjustbox}{minipage=15cm, center}
 \sisetup{table-format=-1.2}   
 \centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} cccccc}
@@ -181,7 +195,8 @@ Penalty &   C &     Solver &  Accuracy &  Precision &    Recall &        F1 \\
 \bottomrule
 
 \end{tabular*}
-\caption{\label{tab:Logistic regression}Logistic regression.}
+\caption{Logistic regression.}
+\label{tab:Logistic regression}
 \end{adjustbox}
 \end{subtable}
 
@@ -189,7 +204,7 @@ Penalty &   C &     Solver &  Accuracy &  Precision &    Recall &        F1 \\
 
 \bigskip
 \begin{subtable}{\textwidth}
-\begin{adjustbox}{minipage=18cm, center}
+\begin{adjustbox}{minipage=15cm, center}
 \sisetup{table-format=-1.2}   
 \centering
 \begin{tabular*}{\textwidth}{c @{\extracolsep{\fill}} ccccc}
@@ -208,20 +223,15 @@ K &  Accuracy &  Precision &    Recall &        F1 \\
 10 &  0.859579 &   0.854397 &  0.873710 &  0.863946 \\
 \bottomrule
 \end{tabular*}
-\caption{K-nearest neighbors.}\label{tab:sub_first}
+\caption{K-nearest neighbors.}
+\label{tab:knn}
 
 \end{adjustbox}
 \end{subtable}
 \caption{Results of the classifiers on the validation set with different hyperparameters. The best score per metric is written in bold.} 
 \label{appendix:Hyperparameters}
-
 \end{table}
 
 \end{appendices}
-
-
-
-
-
 
 \end{document}

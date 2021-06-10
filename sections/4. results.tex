@@ -21,7 +21,7 @@ support-vector machine was chosen to do the predictions, can be read in section 
   \label{fig:con_recs}
 \end{figure}
 
-\footnotetext{Significance for each measure was tested using multiple independent-samples t-tests. The tests compared the five percentage values after each number of videos watched per strategy to the five percentage values of the baseline (strategy 1) at that same number of videos watched. The tests were done for each strategy individually.}
+\footnotetext{Significance for each measure was tested using multiple independent samples t-tests. The tests compared the five percentage values after each number of videos watched per strategy to the five percentage values of the baseline (strategy 1) at that same number of videos watched. The tests were done for each strategy individually.}
 
 All strategies, excluding the baseline, led to an increased number of conspiracy recommendations on the 
 user's homepage. For all strategies, this increase was significant, meaning filter bubbles were indeed being 
@@ -93,8 +93,8 @@ When looking at the conditional probabilities of cross- and within-class edges p
 \ref{tab:cond-probs}), it can be seen that regardless of the strategy, regular videos are highly likely to 
 recommend more regular videos. However, the more personalized the strategy, the higher the probability of 
 conspiracy videos recommending more conspiracy videos. This supports the creation of filter bubbles, as 
-users are more likely to be recommended content similar to that which they already watched. This is also 
-shown in the probability of cross-class edges for the strategies: the more personalized the strategy, the 
+users are more likely to be recommended content similar to that which they already watched. A similar relation
+is shown in the probability of cross-class edges for the strategies: the more personalized the strategy, the 
 lower the probability of cross-class edges being present. This, too, can cause filter bubbles, as users are 
 less likely to be recommended content that is different from that which they have already watched. 
 
@@ -126,7 +126,7 @@ Strategy 4 &                0.000747 &                0.058816 \\
   \textbf{The recommendation network of each strategy}\par\medskip
   \centering
   \includegraphics[keepaspectratio, width=\textwidth]{images/recommendation networks.png}
-  \caption{The networks of homepage recommendations of each strategy. Nodes are videos. An edge from $V1$ to $V2$ indicates $V2$ was recommended to a user directly after watching $V1$. Blue and red nodes indicate regular and conspiracy videos, respectively. Nodes on the left are regular videos that were recommended, nodes on the right are conspiracy videos that were recommended, and videos in the middle are videos that were watched, but not recommended (i.e. from the dataset). Nodes with outgoing edges on the left/right side are videos that were recommended and then chosen to be watched, thus also having outgoing recommendations. Note that most recommendations were not watched (and thus not all possible recommendation links could be checked).}
+  \caption{The networks of homepage recommendations of each strategy. Nodes are videos. An edge from node $V1$ to node $V2$ indicates $V2$ was recommended to a user directly after watching $V1$. Blue and red nodes indicate regular and conspiracy videos, respectively. Nodes on the left are regular videos that were recommended, nodes on the right are conspiracy videos that were recommended, and videos in the middle are videos that were watched, but not recommended (i.e. from the dataset). Nodes with outgoing edges on the left/right side are videos that were recommended and then chosen to be watched, thus also having outgoing recommendations. Note that most recommendations were not watched (and thus not all possible recommendation links could be checked).}
   \label{fig:rec_net}
 \end{figure}
 
@@ -153,9 +153,9 @@ behaviour to that of the baseline (appendix \ref{appendix:reg_sim}).
 
 Every strategy, excluding the baseline, eventually led to a decreased diversity of the recommended conspiracy 
 content. The similarity increased relatively slowly, however, when compared to the speed with which the 
-different strategies ended up in filter bubbles. Only after seven to eight videos did all the different 
-strategies start showing a clear increase, while it took the strategies only a handful of videos to end up 
-in a bubble.
+different strategies ended up in filter bubbles. Only after six to eight videos did all the different 
+strategies start showing a clear increase in similarity, while it took the strategies only a handful of videos to end
+up in a bubble.
 
 While strategy 1 showed comparable behaviour to the other strategies initially, its similarity values soon 
 flat-lined. This was predominantly caused by the fact that, in figure \ref{fig:con_similarities}, only the 
@@ -199,7 +199,7 @@ average length of the recommended videos stayed about the same, spiking up or do
   \label{fig:con_recs_2}
 \end{figure}
 
-While it took only a handful of videos before a user's recommendations started preferring conspiracy content, 
+While it took only a handful of videos before users' recommendations started preferring conspiracy content, 
 undoing this preference required far more videos to be watched. While the algorithm quickly adjusted to the 
 new type of content being watched, it did not stop recommending conspiracy content, even after the users had
 watched fifteen non-conspiracy videos (figure \ref{fig:con_recs_2}). 
@@ -244,7 +244,7 @@ classifier can be found in appendix \ref{appendix:Hyperparameters}.
 Noteworthy is the fact that the optimal ensemble actually outperformed the support-vector machine by a
 slight margin. This ensemble, consisting of the SVM, the neural network, and the k-nearest
 neighbor classifiers, got slightly higher scores than the runner-up across the board. The ensemble had
-a 16-way tie for best-performing parameters, all of which contained at least the SVM, neural network,
+a sixteen-way tie for best-performing parameters, all of which contained at least the SVM, neural network,
 and k-NN classifiers. 
 
 Though the ensemble outperformed the other classifiers, it has a significant drawback: its training time
@@ -257,7 +257,7 @@ result, when taking everything into account, the support-vector machine is the b
 labeling conspiracy videos on YouTube.
 
 Additionally, for predicting the likelihood of recommendations being conspiracy videos in real-time, the 
-best-performing classifier was the neural network. The predicted likelihood was used to find the most-likely 
+best-performing classifier was the neural network. The predicted likelihood was used to find the most likely 
 conspiracy recommendation after each video watched, which was done for strategy 3 and 4. Here, the neural 
 network is preferred over the support-vector machine, as neural networks are better optimized for providing 
 probabilities of samples belonging to a certain class \citep{specht1990probabilistic}.
