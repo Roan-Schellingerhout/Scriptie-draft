@@ -62,8 +62,8 @@ the creation and/or increasing the strength of the filter bubble.
 For strategy 3 and 4, the likelihood of a recommendation being a conspiracy video was estimated by a 
 neural network using the title, description, transcript, channel description, and channel keywords of the 
 specific video. Though this is more information than a regular user would have to their disposal, it has to 
-be kept in mind that humans are able to interpret the thumbnail of the recommendations, can have 
-foreknowledge about the channel that is uploading the video or the subject being mentioned in the title, et cetera.
+be kept in mind that humans are able to interpret the thumbnail of the recommendations and can have 
+foreknowledge about the channel that is uploading the video or the subject being mentioned in the title.
 Thus, the choice was made to allow the neural network to consider the transcript and look at general information 
 about the uploader to balance the scales. 
 
@@ -156,7 +156,7 @@ recommendations were labeled as being either conspiracy or non-conspiracy videos
 grouping all recommendations by their watch strategy and the number of videos watched before them (e.g. the 
 recommendations after the third video watched by all bots with strategy one), it was possible to calculate 
 aggregates about general statistics of the recommendations, such as view count and video duration, and the 
-percentage of conspiracy videos present amongst them. This lead to four groups with fifteen entries of 
+percentage of conspiracy videos present among them. This lead to four groups with fifteen entries of 
 different statistics (one for each video watched). In order to find out whether any of the differences 
 between the groups were significant at any point, a number of independent samples t-tests were performed. 
 
@@ -243,7 +243,7 @@ created:
 title, description, transcript, channel description, and channel keywords of each recommendation were downloaded, 
 after which the classifier predicted whether or not each recommendations was a conspiracy video. Then, the 
 recommendations were grouped by watch strategy and number of videos watched. In doing so, the results could be used
-to determine how quickly the recommendations for each watch strategy returned back to normal. By then analysing the
+to determine how quickly the recommendations for each watch strategy returned back to normal. By then analyzing the
 results again using independent samples t-tests, the \textit{strength} (or \textit{inescapability}) of the filter 
 bubbles created by different watch strategies could be measured.
 
